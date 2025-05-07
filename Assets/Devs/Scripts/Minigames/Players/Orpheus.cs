@@ -52,7 +52,6 @@ public class Orpheus : MonoBehaviour
         {
             if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
             {
-                print("Correct input for rock!");
                 if (_movingRoutine == null)
                 {
                     _movingRoutine = StartCoroutine(MoveForward());
@@ -95,11 +94,12 @@ public class Orpheus : MonoBehaviour
             _failed = true;
             yield return new WaitForEndOfFrame();
         }
-        print("Finished mashing");
+
         if (_movingRoutine == null)
         {
             _movingRoutine = StartCoroutine(MoveForward());
         }
+
         _currentFailedInputs = 0;
         _failedRock.CheckMove(Vector2.up, true);
         _failed = false;

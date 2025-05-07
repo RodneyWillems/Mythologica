@@ -42,6 +42,7 @@ public class Rock : MonoBehaviour
                 default:
                     break;
             }
+            _targetPosition = transform.position + (_correctDirection * 6);
             return false;
         }
         else if (_mashing && direction == _correctDirection && !doneMashing)
