@@ -1,27 +1,25 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Rock : MonoBehaviour
 {
     [SerializeField] private Vector3 _correctDirection;
 
-    private Vector3 _firstDirection;
     private Vector3 _targetPosition;
-    private bool _move;
     private bool _mashing;
-
-    private void Start()
-    {
-        _targetPosition = transform.position + (_correctDirection * 6);
-        _firstDirection = _correctDirection;
-    }
 
     public bool CheckMove(Vector3 direction, bool doneMashing = false)
     {
+        // When input correct move
         if (direction == _correctDirection && !_mashing)
         {
-            _move = true;
+            _targetPosition = transform.position + (_correctDirection * 6);
+            StartCoroutine(Move());
             return true;
         }
+        // When input false first time no move start mash
         else if (!_mashing)
         {
             _mashing = true;
@@ -45,28 +43,28 @@ public class Rock : MonoBehaviour
             _targetPosition = transform.position + (_correctDirection * 6);
             return false;
         }
+        // When input right but mash no move but correct
         else if (_mashing && direction == _correctDirection && !doneMashing)
         {
             return true;
         }
+        // When done mash go move
         else if (doneMashing) 
         {
-            _move = true;
+            StartCoroutine(Move());
             return true;
         }
         return false;
     }
 
-    private void Update()
+    private IEnumerator Move()
     {
-        if (_move)
+        // When rock move rock move out of screen and poof gone
+        while (Vector3.Distance(transform.position, _targetPosition) > 0.5f)
         {
             transform.position += _correctDirection / 20;
-            if (Vector3.Distance(transform.position, _targetPosition) <= 1)
-            {
-                _move = false;
-                Destroy(gameObject);
-            }
+            yield return new WaitForEndOfFrame();
         }
+        Destroy(gameObject);
     }
 }
