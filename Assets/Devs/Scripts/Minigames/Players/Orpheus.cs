@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Orpheus : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private LayerMask _rockLayer;
 
     [Header("Failed")]
@@ -17,41 +19,24 @@ public class Orpheus : MonoBehaviour
 
     // Moving
     private Coroutine _movingRoutine;
-    private Minigames _controls;
-
-    // Misc
-    private MinigameManager _minigameManager;
-
-    #region Setup
-
-    private void OnEnable()
-    {
-        _controls = new Minigames();
-        _controls.Orpheus.Moverock.performed += MoveRock;
-    }
-
-    private void OnDisable()
-    {
-        _controls.Disable();
-    }
-
-    void Start()
-    {
-        StartMinigame();
-        _minigameManager = FindFirstObjectByType<MinigameManager>();
-    }
 
     #endregion
 
     #region Inputs
 
-    private void MoveRock(InputAction.CallbackContext context)
+    public void MoveRock(InputAction.CallbackContext context)
     {
-        Vector2 input = _controls.Orpheus.Moverock.ReadValue<Vector2>();
+        if (context.phase != InputActionPhase.Performed)
+        {
+            return; 
+        }
+        // When the player presses a button it checks with the next rock if it's the correct button or not
+        Vector2 input = context.ReadValue<Vector2>();
         if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 1))
         {
             if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
             {
+                // If the player presses the correct button they move on
                 if (_movingRoutine == null)
                 {
                     _movingRoutine = StartCoroutine(MoveForward());
@@ -59,11 +44,13 @@ public class Orpheus : MonoBehaviour
             }
             else if (hit.collider.GetComponent<Rock>().CheckMove(input) && _failed)
             {
+                // After the player has failed if they press the correct button it helps to move the rock
                 print("Right input for mashing!");
                 _currentFailedInputs++;
             }
             else
             {
+                // If the player presses the wrong button it starts the mashing sequence
                 print("Wrong input start mashing!!!");
                 if (_failRoutine == null)
                 {
@@ -77,6 +64,7 @@ public class Orpheus : MonoBehaviour
 
     private IEnumerator MoveForward()
     {
+        // When the player gets the correct input they move forward
         yield return new WaitForSeconds(0.2f);
         Vector3 targetPosition = transform.position + transform.forward;
         while (Vector3.Distance(transform.position, targetPosition) >= 0.1f)
@@ -89,6 +77,7 @@ public class Orpheus : MonoBehaviour
 
     private IEnumerator Failed()
     {
+        // When the player fails an input they have to start spamming the new correct key before continuing
         while (_currentFailedInputs < _failedInputsNeeded)
         {
             _failed = true;
@@ -108,19 +97,4 @@ public class Orpheus : MonoBehaviour
     }
 
     #endregion
-
-    public void StartMinigame()
-    {
-        _controls.Orpheus.Enable();
-    }
-
-    public void EndMinigame()
-    {
-        _controls.Orpheus.Disable();
-    }
-
-    void Update()
-    {
-        
-    }
 }
