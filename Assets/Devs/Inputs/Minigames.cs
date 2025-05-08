@@ -103,7 +103,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Controller"",
+                    ""name"": ""Xbox"",
                     ""id"": ""042dc8c5-2022-495a-8388-f258284e5ae4"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -116,10 +116,10 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""b21258cc-4b5b-4496-b036-329d9c6859b9"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -127,10 +127,10 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""cb471cc0-26e1-48d2-8b7d-ea9f7a0b769e"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -138,10 +138,10 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""af2f1097-861c-4db3-bf95-be88086336da"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -149,16 +149,16 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""574bfc1c-f616-4d53-92d4-536aba02c8c1"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""Keyboard"",
                     ""id"": ""12e70c02-6696-4c8b-86c2-ceddc448a2a8"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -174,7 +174,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -185,7 +185,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -196,7 +196,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -207,7 +207,117 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""id"": ""0ae83c6e-8008-4e55-99ef-b9122ad308b5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""80edd833-ed11-4c27-a9ad-80ec2828a4ba"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""bf51ee23-aa5d-4d9c-994c-55bd7e77901d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2e713071-39ba-4752-8add-9ca0a377b8eb"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a14e36e7-c2b9-44ca-92bd-2b3f9cdea8e0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Playstation"",
+                    ""id"": ""86f39094-981a-4fc3-8cca-036ee329322d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""83eacf71-4906-491d-a3c7-13089fbc47b0"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Playstation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8de49019-d341-46ae-8415-b6b389fc4897"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Playstation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""282d55a4-a5f4-4ff3-bb7a-5f4af27f0248"",
+                    ""path"": ""<DualShockGamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Playstation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c2871ffa-e375-46d3-8221-1feaf964314b"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Playstation"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -217,16 +327,49 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Controller"",
-            ""bindingGroup"": ""Controller"",
+            ""name"": ""Xbox"",
+            ""bindingGroup"": ""Xbox"",
             ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Switch"",
+            ""bindingGroup"": ""Switch"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<SwitchProControllerHID>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
                 {
                     ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""Playstation"",
+            ""bindingGroup"": ""Playstation"",
+            ""devices"": [
                 {
-                    ""devicePath"": ""<Keyboard>"",
+                    ""devicePath"": ""<DualShockGamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -409,17 +552,56 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="OrpheusActions" /> instance referencing this action map.
     /// </summary>
     public OrpheusActions @Orpheus => new OrpheusActions(this);
-    private int m_ControllerSchemeIndex = -1;
+    private int m_XboxSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
     /// </summary>
     /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
-    public InputControlScheme ControllerScheme
+    public InputControlScheme XboxScheme
     {
         get
         {
-            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
-            return asset.controlSchemes[m_ControllerSchemeIndex];
+            if (m_XboxSchemeIndex == -1) m_XboxSchemeIndex = asset.FindControlSchemeIndex("Xbox");
+            return asset.controlSchemes[m_XboxSchemeIndex];
+        }
+    }
+    private int m_KeyboardSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_SwitchSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme SwitchScheme
+    {
+        get
+        {
+            if (m_SwitchSchemeIndex == -1) m_SwitchSchemeIndex = asset.FindControlSchemeIndex("Switch");
+            return asset.controlSchemes[m_SwitchSchemeIndex];
+        }
+    }
+    private int m_PlaystationSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme PlaystationScheme
+    {
+        get
+        {
+            if (m_PlaystationSchemeIndex == -1) m_PlaystationSchemeIndex = asset.FindControlSchemeIndex("Playstation");
+            return asset.controlSchemes[m_PlaystationSchemeIndex];
         }
     }
     /// <summary>
