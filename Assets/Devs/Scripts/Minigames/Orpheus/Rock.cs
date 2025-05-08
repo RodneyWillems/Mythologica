@@ -5,10 +5,10 @@ using Random = UnityEngine.Random;
 
 public class Rock : MonoBehaviour
 {
-    public IconPreset iconPreset; 
+    [HideInInspector] public IconPreset iconPreset; 
     
     [SerializeField] private Vector3 _correctDirection;
-    [SerializeField] private Material _iconMaterial;
+    [SerializeField] private MeshRenderer _iconRenderer;
     
     private Vector3 _targetPosition;
     private bool _mashing;
@@ -64,19 +64,19 @@ public class Rock : MonoBehaviour
         {
             case 0:
                 _correctDirection = Vector2.up;
-                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["up"]);
+                _iconRenderer.material.SetTexture("Base_Map", iconPreset.iconDict["up"]);
                 break;
             case 1:
                 _correctDirection = Vector2.down;
-                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["down"]);
+                _iconRenderer.material.SetTexture("Base_Map", iconPreset.iconDict["down"]);
                 break;
             case 2:
                 _correctDirection = Vector2.right;
-                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["right"]);
+                _iconRenderer.material.SetTexture("Base_Map", iconPreset.iconDict["right"]);
                 break;
             case 3:
                 _correctDirection = Vector2.left;
-                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["left"]);
+                _iconRenderer.material.SetTexture("Base_Map", iconPreset.iconDict["left"]);
                 break;
             default:
                 break;

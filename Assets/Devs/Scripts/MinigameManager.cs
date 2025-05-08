@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.Utilities;
 using Random = UnityEngine.Random;
 
 public class MinigameManager : MonoBehaviour
@@ -22,13 +24,18 @@ public class MinigameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ReadOnlyArray<PlayerInput> inputUsers = PlayerInput.all;
 
+        foreach (PlayerInput user in inputUsers)
+        {
+            user.onControlsChanged += OnControlChange;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
     #region Orpheus
 
@@ -53,6 +60,15 @@ public class MinigameManager : MonoBehaviour
     }   
 
     #endregion
+    private void OnControlChange(PlayerInput obj)
+    {
+        foreach (GameObject rock in spawnedRocks)
+        {
+            Rock rockScript = rock.GetComponent<Rock>();
+            
+            rockScript.iconPreset = ButtonIconManager.Instance.GetPreset(obj);
+        }
+    }
 
     private void OnGUI()
     {
