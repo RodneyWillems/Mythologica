@@ -151,10 +151,7 @@ MonoBehaviour:
   _gameLength: 30
   _spawnPoint: {fileID: 275076711}
   _rockPrefabs:
-  - {fileID: 8956721101523200718, guid: 4cd92461c6335aa4dbab122c777f076d, type: 3}
-  - {fileID: 4662623803581019532, guid: 944c43559defae44caee8da759b0462a, type: 3}
-  - {fileID: 8632905915807269819, guid: e737ea888d2c2cc49b9bfa174c5bf37c, type: 3}
-  - {fileID: 6652580614618631698, guid: 4af037980c8b51b4db6d3b6c53cb97d4, type: 3}
+  - {fileID: 8464345344201843184, guid: 9c7a6cb2e7297fb438441a4ab0216988, type: 3}
 --- !u!4 &192179371
 Transform:
   m_ObjectHideFlags: 0
@@ -195,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 275076710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,13 +363,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
