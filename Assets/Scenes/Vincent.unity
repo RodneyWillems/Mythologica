@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4af5138b3275894ea44bd0df0e3dea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedRocks: []
   _gameLength: 10
   _spawnPoint: {fileID: 1027743153}
   _rockPrefabs:
@@ -441,7 +442,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a659ebcfbc1bda74b86a00315366a4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 135059363}
+  playstationPreset:
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons: []
+  xboxPreset:
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: 60a0e2753958ab34b880264080cfc676, type: 3}
+    - {fileID: 2800000, guid: 8600333050d190642bcc77c79f61a23d, type: 3}
+    - {fileID: 2800000, guid: f0e9c7bdcf665c94c93916d4ea590b5d, type: 3}
+    - {fileID: 2800000, guid: 07e68231e8edfdd40af99f17d5a2faa6, type: 3}
+  switchPreset:
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons: []
+  pcPreset:
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons: []
 --- !u!4 &343713306
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -6,7 +8,18 @@ using UnityEngine.InputSystem.Users;
 [Serializable]
 public class IconPreset
 {
-    public Sprite[] icons;
+    public Dictionary<string, Texture> iconDict = new Dictionary<string, Texture>();
+    
+    public string[] keys;
+    public Texture[] icons;
+    
+    public void Init()
+    {
+        for (int i = 0; i < keys.Length; i++)
+        {
+            iconDict.Add(keys[i], icons[i]);
+        }
+    }
 }
 public class ButtonIconManager : MonoBehaviour
 {
@@ -19,7 +32,13 @@ public class ButtonIconManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        // Initialize the icon presets
+        playstationPreset.Init();
+        xboxPreset.Init();
+        switchPreset.Init();
+        pcPreset.Init();
+        
+        // Singleton pattern to ensure only one instance of ButtonIconManager exists
 
         if (Instance != this)
         {
@@ -27,6 +46,7 @@ public class ButtonIconManager : MonoBehaviour
         }
         else
         {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -49,16 +69,12 @@ public class ButtonIconManager : MonoBehaviour
         {
             case "Xbox":
                 return xboxPreset;
-                break;
             case "Switch":
                 return switchPreset;
-                break;
             case "PlayStation":
                 return playstationPreset;
-                break;
             case "Keyboard":
                 return pcPreset;
-                break;
         }
         return pcPreset;
     }

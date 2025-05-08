@@ -5,17 +5,24 @@ using Random = UnityEngine.Random;
 
 public class Rock : MonoBehaviour
 {
+    public IconPreset iconPreset; 
+    
     [SerializeField] private Vector3 _correctDirection;
-
+    [SerializeField] private Material _iconMaterial;
+    
     private Vector3 _targetPosition;
     private bool _mashing;
 
+    private void Start()
+    {
+        RandomizeDirection();
+    }
     public bool CheckMove(Vector3 direction, bool doneMashing = false)
     {
         // When input correct move
         if (direction == _correctDirection && !_mashing)
         {
-            _targetPosition = transform.position + (_correctDirection * 6);
+            // _targetPosition = transform.position + (_correctDirection * 6);
             StartCoroutine(Move());
             return true;
         }
@@ -23,24 +30,7 @@ public class Rock : MonoBehaviour
         else if (!_mashing)
         {
             _mashing = true;
-            switch (Random.Range(0, 4))
-            {
-                case 0:
-                    _correctDirection = Vector2.up;
-                    break;
-                case 1:
-                    _correctDirection = Vector2.down;
-                    break;
-                case 2:
-                    _correctDirection = Vector2.right;
-                    break;
-                case 3:
-                    _correctDirection = Vector2.left;
-                    break;
-                default:
-                    break;
-            }
-            _targetPosition = transform.position + (_correctDirection * 6);
+            RandomizeDirection();
             return false;
         }
         // When input right but mash no move but correct
@@ -66,5 +56,31 @@ public class Rock : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
+    }
+
+    private void RandomizeDirection()
+    {
+        switch (Random.Range(0, 4))
+        {
+            case 0:
+                _correctDirection = Vector2.up;
+                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["up"]);
+                break;
+            case 1:
+                _correctDirection = Vector2.down;
+                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["down"]);
+                break;
+            case 2:
+                _correctDirection = Vector2.right;
+                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["right"]);
+                break;
+            case 3:
+                _correctDirection = Vector2.left;
+                _iconMaterial.SetTexture("Base_Map", iconPreset.iconDict["left"]);
+                break;
+            default:
+                break;
+        }
+        _targetPosition = transform.position + (_correctDirection * 6);
     }
 }
