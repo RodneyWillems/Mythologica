@@ -1,13 +1,29 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class MinigameManager : MonoBehaviour
 {
+    public static MinigameManager Instance { get; private set; }
+    public List<GameObject> spawnedRocks = new List<GameObject>();
+    
     [Header("Orpheus Setup")]
     [SerializeField] private int _gameLength = 10;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private GameObject[] _rockPrefabs;
+
+    PlayerInput playerInput;
+    private void Awake()
+    {
+        Instance = this;
+
+        if (Instance != this && Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,7 +51,9 @@ public class MinigameManager : MonoBehaviour
             position += (Vector3)Random.insideUnitCircle * 1f;
             
             GameObject rockPrefab = _rockPrefabs[Random.Range(0, _rockPrefabs.Length)];
-            Instantiate(rockPrefab, position, Random.rotation);
+            GameObject spawnedRock = Instantiate(rockPrefab, position, Random.rotation);
+            
+            spawnedRocks.Add(spawnedRock);
         }
     }   
 
