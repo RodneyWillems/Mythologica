@@ -119,6 +119,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &84837852
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6439859695636971242, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_Name
+      value: IconManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598994319977140072, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: playstationPreset.keys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957186821422716543, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5d402c142bae71f41b558186d6088ce3, type: 3}
 --- !u!1 &192179369
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,10 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4af5138b3275894ea44bd0df0e3dea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedRocks: []
   _gameLength: 30
   _spawnPoint: {fileID: 275076711}
   _rockPrefabs:
-  - {fileID: 8464345344201843184, guid: 9c7a6cb2e7297fb438441a4ab0216988, type: 3}
+  - {fileID: 438637597651698822, guid: dfc57f897d530b64aa7a1f49fed8c79c, type: 3}
 --- !u!4 &192179371
 Transform:
   m_ObjectHideFlags: 0
@@ -857,3 +919,4 @@ SceneRoots:
   - {fileID: 275076711}
   - {fileID: 386663454}
   - {fileID: 1450604825}
+  - {fileID: 84837852}
