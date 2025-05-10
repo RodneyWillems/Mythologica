@@ -20,8 +20,14 @@ public class Orpheus : MonoBehaviour
     // Moving
     private Coroutine _movingRoutine;
 
+    // Misc
+    private PlayerInput _playerInput;
     #endregion
 
+    private void Start()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+    }
     #region Inputs
 
     public void MoveRock(InputAction.CallbackContext context)
@@ -32,7 +38,7 @@ public class Orpheus : MonoBehaviour
         }
         // When the player presses a button it checks with the next rock if it's the correct button or not
         Vector2 input = context.ReadValue<Vector2>();
-        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 1))
+        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f))
         {
             if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
             {
@@ -54,6 +60,9 @@ public class Orpheus : MonoBehaviour
                 print("Wrong input start mashing!!!");
                 if (_failRoutine == null)
                 {
+                    // Rumble the controller
+                    _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(1, 1);
+                    
                     _failedRock = hit.collider.GetComponent<Rock>();
                     _failed = true;
                     _failRoutine = StartCoroutine(Failed());
@@ -77,6 +86,9 @@ public class Orpheus : MonoBehaviour
 
     private IEnumerator Failed()
     {
+        yield return new WaitForSeconds(0.5f);
+        _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0f, 0f);
+        
         // When the player fails an input they have to start spamming the new correct key before continuing
         while (_currentFailedInputs < _failedInputsNeeded)
         {

@@ -5,16 +5,18 @@ using Random = UnityEngine.Random;
 
 public class Rock : MonoBehaviour
 {
-    [HideInInspector] public IconPreset iconPreset; 
+    public IconPreset iconPreset; 
     
     [SerializeField] private Vector3 _correctDirection;
     [SerializeField] private MeshRenderer _iconRenderer;
     
     private Vector3 _targetPosition;
     private bool _mashing;
+    private Animator _animator;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         RandomizeDirection();
     }
     public bool CheckMove(Vector3 direction, bool doneMashing = false)
@@ -31,6 +33,7 @@ public class Rock : MonoBehaviour
         {
             _mashing = true;
             RandomizeDirection();
+            _animator.SetTrigger("Mash");
             return false;
         }
         // When input right but mash no move but correct

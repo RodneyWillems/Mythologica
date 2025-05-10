@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playstationPreset:
+    name: playstation
     keys:
     - up
     - down
@@ -52,6 +53,7 @@ MonoBehaviour:
     - right
     icons: []
   xboxPreset:
+    name: xbox
     keys:
     - up
     - down
@@ -63,6 +65,7 @@ MonoBehaviour:
     - {fileID: 2800000, guid: f0e9c7bdcf665c94c93916d4ea590b5d, type: 3}
     - {fileID: 2800000, guid: 07e68231e8edfdd40af99f17d5a2faa6, type: 3}
   switchPreset:
+    name: switch
     keys:
     - up
     - down
@@ -70,6 +73,7 @@ MonoBehaviour:
     - right
     icons: []
   pcPreset:
+    name: pc
     keys:
     - up
     - down

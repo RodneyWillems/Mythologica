@@ -10,6 +10,7 @@ public class IconPreset
 {
     public Dictionary<string, Texture> iconDict = new Dictionary<string, Texture>();
     
+    public string name;
     public string[] keys;
     public Texture[] icons;
     
@@ -42,7 +43,7 @@ public class ButtonIconManager : MonoBehaviour
         
         // Singleton pattern to ensure only one instance of ButtonIconManager exists
 
-        if (Instance != this)
+        if (Instance != this && Instance != null)
         {
             Destroy(gameObject);
         }
