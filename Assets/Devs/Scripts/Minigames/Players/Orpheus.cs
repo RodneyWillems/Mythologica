@@ -61,7 +61,10 @@ public class Orpheus : MonoBehaviour
                 if (_failRoutine == null)
                 {
                     // Rumble the controller
-                    _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(1, 1);
+                    if (_playerInput.GetDevice<Gamepad>() != null)
+                    {
+                        _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(1, 1);
+                    }
                     
                     _failedRock = hit.collider.GetComponent<Rock>();
                     _failed = true;
@@ -86,8 +89,11 @@ public class Orpheus : MonoBehaviour
 
     private IEnumerator Failed()
     {
-        yield return new WaitForSeconds(0.5f);
-        _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0f, 0f);
+        if (_playerInput.GetDevice<Gamepad>() != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0f, 0f);
+        }
         
         // When the player fails an input they have to start spamming the new correct key before continuing
         while (_currentFailedInputs < _failedInputsNeeded)

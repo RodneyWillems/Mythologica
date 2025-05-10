@@ -39,7 +39,7 @@ public class ButtonIconManager : MonoBehaviour
         //playstationPreset.Init();
         xboxPreset.Init();
         //switchPreset.Init();
-        //pcPreset.Init();
+        pcPreset.Init();
         
         // Singleton pattern to ensure only one instance of ButtonIconManager exists
 
