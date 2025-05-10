@@ -38,7 +38,7 @@ public class Orpheus : MonoBehaviour
         }
         // When the player presses a button it checks with the next rock if it's the correct button or not
         Vector2 input = context.ReadValue<Vector2>();
-        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f))
+        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f, _rockLayer))
         {
             if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
             {
@@ -51,7 +51,6 @@ public class Orpheus : MonoBehaviour
             else if (hit.collider.GetComponent<Rock>().CheckMove(input) && _failed)
             {
                 // After the player has failed if they press the correct button it helps to move the rock
-                print("Right input for mashing!");
                 _currentFailedInputs++;
             }
             else

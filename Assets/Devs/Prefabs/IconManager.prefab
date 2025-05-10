@@ -46,8 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playstationPreset:
     name: playstation
-    keys: []
-    icons: []
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: 7d2197405577e7a4895dece2c96d085c, type: 3}
+    - {fileID: 2800000, guid: caa791b2791e5824a983308342a64ce2, type: 3}
+    - {fileID: 2800000, guid: 9442ac9a0da239449b01665aae9c3d14, type: 3}
+    - {fileID: 2800000, guid: 41dc47fb9335a8a4ca3ffc6bcb43a77e, type: 3}
   xboxPreset:
     name: xbox
     keys:
@@ -67,7 +75,11 @@ MonoBehaviour:
     - down
     - left
     - right
-    icons: []
+    icons:
+    - {fileID: 2800000, guid: 7d768f5e94b2ec5449b8de519eb06b1e, type: 3}
+    - {fileID: 2800000, guid: 28eb918296dea2c4fbdc6c18ff047078, type: 3}
+    - {fileID: 2800000, guid: 7400db50792572f4ca4928da6045a877, type: 3}
+    - {fileID: 2800000, guid: e590b363e88ed0e478d198d02ecc1c21, type: 3}
   pcPreset:
     name: pc
     keys:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8343838463677657899}
   - component: {fileID: 6719658533294685598}
   - component: {fileID: 2199368139224410749}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Betere Steen_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 9096583447330860747}
   - component: {fileID: 3787971243897764175}
   - component: {fileID: 5275960742394833228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: IconBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 9186270762805979385}
   - component: {fileID: 2677931480351203408}
   - component: {fileID: 2723867587056330691}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

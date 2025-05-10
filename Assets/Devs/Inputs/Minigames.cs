@@ -284,7 +284,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<DualShockGamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Playstation"",
+                    ""groups"": ""PlayStation"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -295,7 +295,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Playstation"",
+                    ""groups"": ""PlayStation"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -306,7 +306,7 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<DualShockGamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Playstation"",
+                    ""groups"": ""PlayStation"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -317,7 +317,62 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
                     ""path"": ""<DualShockGamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Playstation"",
+                    ""groups"": ""PlayStation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""DS4"",
+                    ""id"": ""1a25060e-63b0-4ef0-b543-859b68b8e8dc"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""708a4785-c03a-4cf2-baef-2ba295464bc4"",
+                    ""path"": ""<HID::SZ-MYPOWER DS4 Wired Controller>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PlayStation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1e45313c-6374-454a-92cc-7d774ba33e34"",
+                    ""path"": ""<HID::SZ-MYPOWER DS4 Wired Controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PlayStation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""85afdf24-5226-4756-b6f2-c816751de3de"",
+                    ""path"": ""<HID::SZ-MYPOWER DS4 Wired Controller>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PlayStation"",
+                    ""action"": ""Move rock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f8ea6498-21a9-4aad-a9f5-cecaabba459c"",
+                    ""path"": ""<HID::SZ-MYPOWER DS4 Wired Controller>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PlayStation"",
                     ""action"": ""Move rock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -365,12 +420,17 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Playstation"",
-            ""bindingGroup"": ""Playstation"",
+            ""name"": ""PlayStation"",
+            ""bindingGroup"": ""PlayStation"",
             ""devices"": [
                 {
                     ""devicePath"": ""<DualShockGamepad>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<HID::SZ-MYPOWER DS4 Wired Controller>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -591,17 +651,17 @@ public partial class @Minigames: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_SwitchSchemeIndex];
         }
     }
-    private int m_PlaystationSchemeIndex = -1;
+    private int m_PlayStationSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
     /// </summary>
     /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
-    public InputControlScheme PlaystationScheme
+    public InputControlScheme PlayStationScheme
     {
         get
         {
-            if (m_PlaystationSchemeIndex == -1) m_PlaystationSchemeIndex = asset.FindControlSchemeIndex("Playstation");
-            return asset.controlSchemes[m_PlaystationSchemeIndex];
+            if (m_PlayStationSchemeIndex == -1) m_PlayStationSchemeIndex = asset.FindControlSchemeIndex("PlayStation");
+            return asset.controlSchemes[m_PlayStationSchemeIndex];
         }
     }
     /// <summary>

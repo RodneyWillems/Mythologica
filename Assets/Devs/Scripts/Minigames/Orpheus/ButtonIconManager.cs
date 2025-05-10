@@ -16,8 +16,6 @@ public class IconPreset
     
     public void Init()
     {
-        Debug.Log(keys.Length);
-        Debug.Log(icons.Length);
         for (int i = 0; i < keys.Length; i++)
         {
             iconDict.Add(keys[i], icons[i]);
@@ -36,9 +34,9 @@ public class ButtonIconManager : MonoBehaviour
     private void Awake()
     {
         // Initialize the icon presets
-        //playstationPreset.Init();
+        playstationPreset.Init();
         xboxPreset.Init();
-        //switchPreset.Init();
+        switchPreset.Init();
         pcPreset.Init();
         
         // Singleton pattern to ensure only one instance of ButtonIconManager exists

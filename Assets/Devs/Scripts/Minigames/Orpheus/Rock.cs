@@ -21,14 +21,13 @@ public class Rock : MonoBehaviour
     }
     public bool CheckMove(Vector3 direction, bool doneMashing = false)
     {
-        // When input correct move
+        // When the player presses the correct button the rock moves out of the way
         if (direction == _correctDirection && !_mashing)
         {
-            // _targetPosition = transform.position + (_correctDirection * 6);
             StartCoroutine(Move());
             return true;
         }
-        // When input false first time no move start mash
+        // When the player presses the wrong button the first time the mashing sequence begins
         else if (!_mashing)
         {
             _mashing = true;
@@ -36,12 +35,13 @@ public class Rock : MonoBehaviour
             _animator.SetTrigger("Mash");
             return false;
         }
-        // When input right but mash no move but correct
+        // When the player presses the correct button but they have to mash the rock moves a small amount
         else if (_mashing && direction == _correctDirection && !doneMashing)
         {
+            transform.position += _correctDirection / 20;
             return true;
         }
-        // When done mash go move
+        // When the player is done mashing the rock moves out of the way
         else if (doneMashing) 
         {
             StartCoroutine(Move());
@@ -52,7 +52,7 @@ public class Rock : MonoBehaviour
 
     private IEnumerator Move()
     {
-        // When rock move rock move out of screen and poof gone
+        // When the rock moves it destroys itself once it's out of the screen
         while (Vector3.Distance(transform.position, _targetPosition) > 0.5f)
         {
             transform.position += _correctDirection / 20;
@@ -63,6 +63,7 @@ public class Rock : MonoBehaviour
 
     private void RandomizeDirection()
     {
+        // When the rock gets spawned OR the player presses the wrong button the rock gets a random direction and sets it's icon as the correct button
         switch (Random.Range(0, 4))
         {
             case 0:
