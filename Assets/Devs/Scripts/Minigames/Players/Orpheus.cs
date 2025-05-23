@@ -1,48 +1,117 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Orpheus : MonoBehaviour
 {
-    [SerializeField] private LayerMask m_rockLayer;
+    #region Variables
 
-    private Minigames _controls;
+    [SerializeField] private LayerMask _rockLayer;
 
-    #region Setup
+    [Header("Failed")]
+    [SerializeField] private int _failedInputsNeeded;
 
-    private void OnEnable()
-    {
-        _controls = new Minigames();
-        _controls.Orpheus.Moverock.performed += MoveRock;
-    }
+    private Rock _failedRock;
+    private int _currentFailedInputs;
+    private bool _failed;
+    private Coroutine _failRoutine;
 
-    void Start()
-    {
+    // Moving
+    private Coroutine _movingRoutine;
 
-    }
-
+    // Misc
+    private PlayerInput _playerInput;
     #endregion
 
+    private void Start()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+    }
     #region Inputs
 
-    private void MoveRock(InputAction.CallbackContext context)
+    public void MoveRock(InputAction.CallbackContext context)
     {
-        Vector2 input = _controls.Orpheus.Moverock.ReadValue<Vector2>();
-        if (Physics.Raycast(transform.position, transform.forward, 0.5f, m_rockLayer))
+        if (context.phase != InputActionPhase.Performed)
         {
-
+            return; 
+        }
+        // When the player presses a button it checks with the next rock if it's the correct button or not
+        Vector2 input = context.ReadValue<Vector2>();
+        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f, _rockLayer))
+        {
+            if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
+            {
+                // If the player presses the correct button they move on
+                if (_movingRoutine == null)
+                {
+                    _movingRoutine = StartCoroutine(MoveForward());
+                }
+            }
+            else if (hit.collider.GetComponent<Rock>().CheckMove(input) && _failed)
+            {
+                // After the player has failed if they press the correct button it helps to move the rock
+                _currentFailedInputs++;
+            }
+            else
+            {
+                // If the player presses the wrong button it starts the mashing sequence
+                print("Wrong input start mashing!!!");
+                if (_failRoutine == null)
+                {
+                    // Rumble the controller
+                    if (_playerInput.GetDevice<Gamepad>() != null)
+                    {
+                        _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(1, 1);
+                    }
+                    
+                    _failedRock = hit.collider.GetComponent<Rock>();
+                    _failed = true;
+                    _failRoutine = StartCoroutine(Failed());
+                }
+            }
         }
     }
 
-    #endregion
-
-    public void StartMinigame()
+    private IEnumerator MoveForward()
     {
-        _controls.Orpheus.Enable();
+        // When the player gets the correct input they move forward
+        yield return new WaitForSeconds(0.2f);
+        Vector3 targetPosition = transform.position + transform.forward;
+        while (Vector3.Distance(transform.position, targetPosition) >= 0.1f)
+        {
+            transform.position += transform.forward / 8;
+            yield return new WaitForEndOfFrame();
+        }
+        _movingRoutine = null;
     }
 
-    void Update()
+    private IEnumerator Failed()
     {
+        if (_playerInput.GetDevice<Gamepad>() != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0f, 0f);
+        }
         
+        // When the player fails an input they have to start spamming the new correct key before continuing
+        while (_currentFailedInputs < _failedInputsNeeded)
+        {
+            _failed = true;
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (_movingRoutine == null)
+        {
+            _movingRoutine = StartCoroutine(MoveForward());
+        }
+
+        _currentFailedInputs = 0;
+        _failedRock.CheckMove(Vector2.up, true);
+        _failed = false;
+        _failRoutine = null;
+        yield return null;
     }
+
+    #endregion
 }

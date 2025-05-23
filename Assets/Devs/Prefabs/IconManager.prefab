@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6439859695636971242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8957186821422716543}
+  - component: {fileID: 6598994319977140072}
+  m_Layer: 0
+  m_Name: IconManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8957186821422716543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439859695636971242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6598994319977140072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439859695636971242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a659ebcfbc1bda74b86a00315366a4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playstationPreset:
+    name: playstation
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: 7d2197405577e7a4895dece2c96d085c, type: 3}
+    - {fileID: 2800000, guid: caa791b2791e5824a983308342a64ce2, type: 3}
+    - {fileID: 2800000, guid: 9442ac9a0da239449b01665aae9c3d14, type: 3}
+    - {fileID: 2800000, guid: 41dc47fb9335a8a4ca3ffc6bcb43a77e, type: 3}
+  xboxPreset:
+    name: xbox
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: 60a0e2753958ab34b880264080cfc676, type: 3}
+    - {fileID: 2800000, guid: 8600333050d190642bcc77c79f61a23d, type: 3}
+    - {fileID: 2800000, guid: f0e9c7bdcf665c94c93916d4ea590b5d, type: 3}
+    - {fileID: 2800000, guid: 07e68231e8edfdd40af99f17d5a2faa6, type: 3}
+  switchPreset:
+    name: switch
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: 7d768f5e94b2ec5449b8de519eb06b1e, type: 3}
+    - {fileID: 2800000, guid: 28eb918296dea2c4fbdc6c18ff047078, type: 3}
+    - {fileID: 2800000, guid: 7400db50792572f4ca4928da6045a877, type: 3}
+    - {fileID: 2800000, guid: e590b363e88ed0e478d198d02ecc1c21, type: 3}
+  pcPreset:
+    name: pc
+    keys:
+    - up
+    - down
+    - left
+    - right
+    icons:
+    - {fileID: 2800000, guid: c24b1b68a8d75e4489e5de77c8cc2e75, type: 3}
+    - {fileID: 2800000, guid: cafeefbd6ca500345b3b280fac1880f9, type: 3}
+    - {fileID: 2800000, guid: 41c8b09a5dfceac44b791914689e6468, type: 3}
+    - {fileID: 2800000, guid: a48698f59bf14bb4da461af91f5ad5dc, type: 3}
