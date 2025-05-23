@@ -48,7 +48,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            SceneManager.instance.LoadSceneOnline("TestLobby");
+            SceneManager.instance.LoadSceneOnline("Lobby");
         }
     }
     
