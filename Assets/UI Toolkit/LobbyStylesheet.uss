@@ -1,0 +1,66 @@
+.Player {
+    background-color: rgba(0, 38, 255, 0);
+    padding-left: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 25%;
+    height: auto;
+}
+
+.Selector_Button {
+    width: 10%;
+    height: 20%;
+    background-color: rgb(59, 59, 59);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.Selector_Button:hover {
+    background-color: rgb(38, 38, 38);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    width: 10%;
+    height: 20%;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
+}
+
+.icon {
+    height: 70%;
+    width: 100%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    font-size: 20px;
+}
+
+.selector {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.name {
+    margin-top: auto;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/Artists/Textures/Fonts/BetterWOAH.ttf?fileID=12800000&guid=6ab2a9ffcb6c6ce479292e8be05d9186&type=3#BetterWOAH");
+    font-size: 48px;
+}

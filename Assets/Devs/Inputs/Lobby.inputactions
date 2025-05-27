@@ -1,0 +1,54 @@
+{
+    "name": "Lobby",
+    "maps": [
+        {
+            "name": "LobbyMap",
+            "id": "4b9adcf9-795b-4383-9ef4-6d352422d776",
+            "actions": [
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "417d497c-816f-40de-8dd5-635c09f03df2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Previous",
+                    "type": "Button",
+                    "id": "59927cbe-1e93-4a89-8bdb-22e9182278be",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a33bbf00-b586-423c-8bd2-2d879c0cf2c7",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c64e867a-37f2-4a91-a53f-71d033583d58",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Previous",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
