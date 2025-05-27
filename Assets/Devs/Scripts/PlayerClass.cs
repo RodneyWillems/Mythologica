@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class PlayerClass
 {   
     public PlayerClass(int id, string name)
     {
-        this.id = id;
-        this.name = name;
+        this.Id = id;
+        this.Name = name;
     }
     
-    public int id { get; private set; }
-    public string name { get; private set; }
+    public int Id { get; private set; }
+    public string Name { get; private set; }
 }

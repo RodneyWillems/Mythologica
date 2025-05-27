@@ -4,18 +4,19 @@ using UnityEngine.InputSystem;
 
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class LobbyPlayerInput : MonoBehaviourPun, Lobby.ILobbyMapActions
 {
-    public PlayerClass playerClass;
+    public PlayerClass Player;
     
     private VisualElement _playerObject;
     private void Start()
     {
-        playerClass = new PlayerClass(PhotonNetwork.CurrentRoom.PlayerCount - 1, photonView.Owner.NickName);
+        Player = LobbyManager.Instance.GetPlayerClass(photonView);
         
-        _playerObject = LobbyManager.Instance.GetPlayerObject(playerClass);
+        _playerObject = LobbyManager.Instance.GetPlayerObject(Player);
     }
     public void OnNext(InputAction.CallbackContext ctx)
     {
