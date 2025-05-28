@@ -22,7 +22,15 @@ public class Orpheus : MonoBehaviour
 
     // Misc
     private PlayerInput _playerInput;
+    private Minigames m_controls;
     #endregion
+
+    private void OnEnable()
+    {
+        m_controls = new();
+        m_controls.Orpheus.Enable();
+        m_controls.Orpheus.Moverock.performed += MoveRock;
+    }
 
     private void Start()
     {
