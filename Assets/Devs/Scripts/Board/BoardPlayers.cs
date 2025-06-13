@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,13 +7,35 @@ public class BoardPlayers : MonoBehaviour
 {
     public float WaitTime;
 
-    private bool m_myTurn;
-    private PlayerInput m_playerInput;
+    private IntersectionTile _intersection;
+    private Tiles _lastTile;
+
+    private bool _myTurn;
+    private Board _controls;
+
+    private void OnEnable()
+    {
+        _controls = new();
+        _controls.Enable();
+
+        _controls.Intersection.SelectRight.performed += SelectRightArrow;
+        _controls.Intersection.SelectLeft.performed += SelectLeftArrow;
+        _controls.Intersection.SelectOption.performed += SelecIntersectionOption;
+
+        _controls.Turn.Select.performed += SelectTurnOption;
+        _controls.Turn.Down.performed += NextOption;
+        _controls.Turn.Up.performed += PreviousOption;
+    }
+
+    private void OnDisable()
+    {
+        _controls.Disable();
+    }
 
     private void Start()
     {
         StartCoroutine(Wait());
-        m_playerInput = GetComponent<PlayerInput>();
+        _controls.Disable();
     }
 
     private IEnumerator Wait()
@@ -24,7 +47,8 @@ public class BoardPlayers : MonoBehaviour
     public void StartTurn()
     {
         print("It's my turn! (" + name + ")");
-        m_myTurn = true;
+        _myTurn = true;
+        _controls.Turn.Enable();
     }
 
     public void AddCoins(int amount)
@@ -39,21 +63,51 @@ public class BoardPlayers : MonoBehaviour
         // Play sad animation
     }
 
-    public void StartDirectionSelection()
+    private void SelectTurnOption(InputAction.CallbackContext context)
     {
-        m_playerInput.currentActionMap = null;
+        
     }
 
+    private void NextOption(InputAction.CallbackContext context)
+    {
+        
+    }
 
+    private void PreviousOption(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void StartDirectionSelection(IntersectionTile intersection)
+    {
+        _controls.Intersection.Enable();
+
+        _intersection = intersection;
+    }
+
+    private void SelectRightArrow(InputAction.CallbackContext context)
+    {
+        _intersection.SelectRightArrow();
+    }
+
+    private void SelectLeftArrow(InputAction.CallbackContext context)
+    {
+        _intersection.SelectLeftArrow();
+    }
+
+    private void SelecIntersectionOption(InputAction.CallbackContext context)
+    {
+        _intersection.GetNextTile();
+    }
 
     private void OnGUI()
     {
-        if (m_myTurn)
+        if (_myTurn)
         {
             if (GUI.Button(new Rect(50, 100, 200, 75), name + "'s Turn"))
             {
                 BoardgameManager.Instance.NextTurn();
-                m_myTurn = false;
+                _myTurn = false;
             }
         }
     }

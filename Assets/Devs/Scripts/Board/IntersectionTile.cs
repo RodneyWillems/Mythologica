@@ -2,39 +2,68 @@ using UnityEngine;
 
 public class IntersectionTile : Tiles
 {
-    [SerializeField] private GameObject m_arrowLeft;
-    [SerializeField] private GameObject m_arrowRight;
+    [SerializeField] private MeshRenderer _arrowLeft;
+    [SerializeField] private MeshRenderer _arrowRight;
 
-    [SerializeField] private Transform m_leftTile;
-    [SerializeField] private Transform m_rightTile;
+    [SerializeField] private Transform _leftTile;
+    [SerializeField] private Transform _rightTile;
 
-    public override Transform GetNextTile(int selectedArrow = 0, BoardPlayers player = null)
+    private int _selectedArrow;
+    private bool _firstTime = true;
+
+    public override Transform GetNextTile(BoardPlayers player = null)
     {
-        if (selectedArrow == 1)
+        if (_firstTime)
         {
-            return m_rightTile;
+            StartSelectingArrows(player);
+            _firstTime = false;
+            return null;
+        }
+        else if (_selectedArrow == 1)
+        {
+            _firstTime = true;
+            print(_rightTile.name);
+            return _rightTile;
         }
         else
         {
-            return m_leftTile;
+            _firstTime = true;
+            print(_leftTile.name);
+            return _leftTile;
         }
     }
 
     public void StartSelectingArrows(BoardPlayers player)
     {
-        player.StartDirectionSelection();
+        player.StartDirectionSelection(this);
         SelectLeftArrow();
     }
 
     public void SelectLeftArrow()
     {
-        m_arrowLeft.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 1f);
-        m_arrowRight.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0.5f);
+        _selectedArrow = 0;
+        _arrowLeft.material.color = new Color(1, 1, 1, 1f);
+        _arrowRight.material.color = new Color(1, 1, 1, 0.2f);
+        print("Selected left!");
     }
 
     public void SelectRightArrow()
     {
-        m_arrowRight.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 1f);
-        m_arrowLeft.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0.5f);
+        _selectedArrow = 1;
+        _arrowRight.material.color = new Color(1, 1, 1, 1f);
+        _arrowLeft.material.color = new Color(1, 1, 1, 0.2f);
+        print("Selected right!");
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(50, 300, 200, 75), "Test Intersection"))
+        {
+            GetNextTile(FindFirstObjectByType<BoardPlayers>());
+        }
+        if (GUI.Button(new Rect(50, 400, 200, 75), "Select intersection"))
+        {
+            GetNextTile();
+        }
     }
 }
