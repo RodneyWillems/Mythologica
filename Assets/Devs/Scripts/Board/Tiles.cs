@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class Tiles : MonoBehaviour
 {
-    [SerializeField] protected Transform m_nextTile;
-    [SerializeField] protected int m_coinsAdded;
+    [SerializeField] protected Transform _nextTile;
+    [SerializeField] protected int _coinsAdded;
 
     public virtual void LandOnTile(BoardPlayers player)
     {
-        player.AddCoins(m_coinsAdded);
+        player.AddCoins(_coinsAdded);
     }
 
-    public virtual Transform GetNextTile(int selectedArrow = 0, BoardPlayers player = null)
+    public virtual Transform GetNextTile(BoardPlayers player = null)
     {
-        if (m_nextTile.GetComponent<IntersectionTile>() != null)
+        if (_nextTile.GetComponent<IntersectionTile>() != null)
         {
-            m_nextTile.GetComponent<IntersectionTile>().StartSelectingArrows(player);
+            _nextTile.GetComponent<IntersectionTile>().StartSelectingArrows(player);
         }
-        return m_nextTile;
+        return _nextTile;
     }
 }

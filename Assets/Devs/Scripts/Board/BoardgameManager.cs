@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public enum TurnOrder
@@ -15,11 +16,11 @@ public class BoardgameManager : MonoBehaviour
     public static BoardgameManager Instance { get; private set; }
 
     [SerializeField]
-    private PlayerData[] m_playerData;
+    private PlayerData[] _playerData;
 
-    private List<BoardPlayers> m_boardPlayers = new();
+    private List<BoardPlayers> _boardPlayers = new();
 
-    private TurnOrder m_turnOrder;
+    private TurnOrder _turnOrder;
 
     private void Awake()
     {
@@ -36,36 +37,43 @@ public class BoardgameManager : MonoBehaviour
 
     private void Start()
     {
-        m_turnOrder = TurnOrder.Player1;
-        m_playerData = new PlayerData[4];
+        _turnOrder = TurnOrder.Player1;
+        _playerData = new PlayerData[4];
         for (int i = 0; i < 4; i++)
         {
-            m_playerData[i].Obols = 20;
+            _playerData[i] = new()
+            {
+                Obols = 20
+            };
         }
     }
 
     public void AddPlayer(BoardPlayers player)
     {
-        m_boardPlayers.Add(player);
-        m_playerData[m_boardPlayers.Count].PlayerName = player.name;
-        m_playerData[m_boardPlayers.Count].PlayerObject = player.gameObject;
+        _boardPlayers.Add(player);
+        _playerData[_boardPlayers.Count - 1].PlayerName = player.name;
+        _playerData[_boardPlayers.Count - 1].PlayerObject = player.gameObject;
     }
 
     private void TurnHandler()
     {
-        switch (m_turnOrder)
+        switch (_turnOrder)
         {
             case TurnOrder.Player1:
-                m_boardPlayers[0].StartTurn();
+                _boardPlayers[0].StartTurn();
+                _boardPlayers[0].transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 1;
                 break;
             case TurnOrder.Player2:
-                m_boardPlayers[1].StartTurn();
+                _boardPlayers[1].StartTurn();
+                _boardPlayers[1].transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 1;
                 break;
             case TurnOrder.Player3:
-                m_boardPlayers[2].StartTurn();
+                _boardPlayers[2].StartTurn();
+                _boardPlayers[2].transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 1;
                 break;
             case TurnOrder.Player4:
-                m_boardPlayers[3].StartTurn();
+                _boardPlayers[3].StartTurn();
+                _boardPlayers[3].transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 1;
                 break;
             default:
                 break;
@@ -74,9 +82,14 @@ public class BoardgameManager : MonoBehaviour
 
     public void NextTurn()
     {
-        if (m_turnOrder != TurnOrder.Player4)
+        foreach(BoardPlayers player in _boardPlayers)
         {
-            m_turnOrder = (TurnOrder)(int)m_turnOrder + 1;
+            player.transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 0;
+        }
+
+        if (_turnOrder != TurnOrder.Player4)
+        {
+            _turnOrder = (TurnOrder)(int)_turnOrder + 1;
             TurnHandler();
         }
         else
@@ -104,7 +117,7 @@ public class BoardgameManager : MonoBehaviour
             if (GUI.Button(new Rect(50, 100, 200, 75), "Restart order"))
             {
                 m_minigameTime = false;
-                m_turnOrder = TurnOrder.Player1;
+                _turnOrder = TurnOrder.Player1;
                 TurnHandler();
             }
         }
@@ -112,11 +125,11 @@ public class BoardgameManager : MonoBehaviour
 
     public void AddCoins(BoardPlayers player, int amount)
     {
-        for (int i = 0; i < m_boardPlayers.Count; i++)
+        for (int i = 0; i < _boardPlayers.Count; i++)
         {
-            if (player == m_boardPlayers[i])
+            if (player == _boardPlayers[i])
             {
-                m_playerData[i].Obols += amount;
+                _playerData[i].Obols += amount;
                 break;
             }
         }
