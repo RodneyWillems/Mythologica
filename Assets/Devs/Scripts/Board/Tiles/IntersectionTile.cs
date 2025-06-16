@@ -22,19 +22,23 @@ public class IntersectionTile : Tiles
         else if (_selectedArrow == 1)
         {
             _firstTime = true;
-            print(_rightTile.name);
+            _arrowLeft.gameObject.SetActive(false);
+            _arrowRight.gameObject.SetActive(false);
             return _rightTile;
         }
         else
         {
             _firstTime = true;
-            print(_leftTile.name);
+            _arrowLeft.gameObject.SetActive(false);
+            _arrowRight.gameObject.SetActive(false);
             return _leftTile;
         }
     }
 
     public void StartSelectingArrows(BoardPlayers player)
     {
+        _arrowLeft.gameObject.SetActive(true);
+        _arrowRight.gameObject.SetActive(true);
         player.StartDirectionSelection(this);
         SelectLeftArrow();
     }
@@ -42,28 +46,14 @@ public class IntersectionTile : Tiles
     public void SelectLeftArrow()
     {
         _selectedArrow = 0;
-        _arrowLeft.material.color = new Color(1, 1, 1, 1f);
-        _arrowRight.material.color = new Color(1, 1, 1, 0.2f);
-        print("Selected left!");
+        _arrowLeft.material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        _arrowRight.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     }
 
     public void SelectRightArrow()
     {
         _selectedArrow = 1;
-        _arrowRight.material.color = new Color(1, 1, 1, 1f);
-        _arrowLeft.material.color = new Color(1, 1, 1, 0.2f);
-        print("Selected right!");
-    }
-
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(50, 300, 200, 75), "Test Intersection"))
-        {
-            GetNextTile(FindFirstObjectByType<BoardPlayers>());
-        }
-        if (GUI.Button(new Rect(50, 400, 200, 75), "Select intersection"))
-        {
-            GetNextTile();
-        }
+        _arrowRight.material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        _arrowLeft.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     }
 }
