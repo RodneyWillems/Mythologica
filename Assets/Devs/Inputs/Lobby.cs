@@ -72,7 +72,7 @@ using UnityEngine.InputSystem.Utilities;
 /// }
 /// </code>
 /// </example>
-public partial class @Lobby: IInputActionCollection2, IDisposable
+public partial class @LobbyInputs: IInputActionCollection2, IDisposable
 {
     /// <summary>
     /// Provides access to the underlying asset instance.
@@ -82,7 +82,7 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
     /// <summary>
     /// Constructs a new instance.
     /// </summary>
-    public @Lobby()
+    public @LobbyInputs()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Lobby"",
@@ -108,6 +108,15 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""e652b8d4-a5fd-4baf-9da7-f837a2c58be7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -117,7 +126,7 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Next"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -128,25 +137,71 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cef9841c-0ce1-49a9-93f5-3ae95a442b7d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""281de715-fc5e-4c42-8dbd-95f4eb9598df"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // LobbyMap
         m_LobbyMap = asset.FindActionMap("LobbyMap", throwIfNotFound: true);
         m_LobbyMap_Next = m_LobbyMap.FindAction("Next", throwIfNotFound: true);
         m_LobbyMap_Previous = m_LobbyMap.FindAction("Previous", throwIfNotFound: true);
+        m_LobbyMap_Ready = m_LobbyMap.FindAction("Ready", throwIfNotFound: true);
     }
 
-    ~@Lobby()
+    ~@LobbyInputs()
     {
-        UnityEngine.Debug.Assert(!m_LobbyMap.enabled, "This will cause a leak and performance issues, Lobby.LobbyMap.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LobbyMap.enabled, "This will cause a leak and performance issues, LobbyInputs.LobbyMap.Disable() has not been called.");
     }
 
     /// <summary>
@@ -224,17 +279,18 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
     private List<ILobbyMapActions> m_LobbyMapActionsCallbackInterfaces = new List<ILobbyMapActions>();
     private readonly InputAction m_LobbyMap_Next;
     private readonly InputAction m_LobbyMap_Previous;
+    private readonly InputAction m_LobbyMap_Ready;
     /// <summary>
     /// Provides access to input actions defined in input action map "LobbyMap".
     /// </summary>
     public struct LobbyMapActions
     {
-        private @Lobby m_Wrapper;
+        private @LobbyInputs m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public LobbyMapActions(@Lobby wrapper) { m_Wrapper = wrapper; }
+        public LobbyMapActions(@LobbyInputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
         /// Provides access to the underlying input action "LobbyMap/Next".
         /// </summary>
@@ -243,6 +299,10 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "LobbyMap/Previous".
         /// </summary>
         public InputAction @Previous => m_Wrapper.m_LobbyMap_Previous;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyMap/Ready".
+        /// </summary>
+        public InputAction @Ready => m_Wrapper.m_LobbyMap_Ready;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -275,6 +335,9 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
             @Previous.started += instance.OnPrevious;
             @Previous.performed += instance.OnPrevious;
             @Previous.canceled += instance.OnPrevious;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
         }
 
         /// <summary>
@@ -292,6 +355,9 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
             @Previous.started -= instance.OnPrevious;
             @Previous.performed -= instance.OnPrevious;
             @Previous.canceled -= instance.OnPrevious;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
         }
 
         /// <summary>
@@ -325,6 +391,32 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="LobbyMapActions" /> instance referencing this action map.
     /// </summary>
     public LobbyMapActions @LobbyMap => new LobbyMapActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_ControllerSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LobbyMap" which allows adding and removing callbacks.
     /// </summary>
@@ -346,5 +438,12 @@ public partial class @Lobby: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPrevious(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ready" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReady(InputAction.CallbackContext context);
     }
 }

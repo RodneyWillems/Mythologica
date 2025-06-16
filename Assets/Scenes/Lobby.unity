@@ -184,8 +184,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe263a7fb8994e94da565ef11fc7f982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  _uiDocument: {fileID: 0}
+  Players: []
+  UiDoc: {fileID: 0}
+  ReadyCount: 0
+  ModelOptions:
+  - Model: {fileID: 0}
+    Icon: {fileID: 2800000, guid: 5e34e7014e929fc47bf61b977e103212, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 0}
+    Icon: {fileID: 2800000, guid: 11da878917aca074bab7f7c181f2a802, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 0}
+    Icon: {fileID: 2800000, guid: f1991a8bb35157740bcce6410bb0af2d, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 0}
+    Icon: {fileID: 2800000, guid: fcc890246b25c1744841e3a33ef8fe56, type: 3}
+    IsSelected: 0
 --- !u!114 &1148391040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148391036}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 

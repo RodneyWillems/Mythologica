@@ -67,3 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70018929cba402489d80ae87bcd17af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player:
+    id: 0
+    name: 
+    isReady: 0
+    playermodel:
+      Model: {fileID: 0}
+      Icon: {fileID: 0}
+      IsSelected: 0

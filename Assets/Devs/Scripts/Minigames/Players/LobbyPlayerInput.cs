@@ -7,30 +7,55 @@ using Photon.Realtime;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
-public class LobbyPlayerInput : MonoBehaviourPun, Lobby.ILobbyMapActions
+public class LobbyPlayerInput : MonoBehaviourPun
 {
     public PlayerClass Player;
     
     private VisualElement _playerObject;
+    
+    private LobbyInputs _lobbyInputs;
     private void Start()
     {
         Player = LobbyManager.Instance.GetPlayerClass(photonView);
         
         _playerObject = LobbyManager.Instance.GetPlayerObject(Player);
     }
+
+    private void OnEnable()
+    {
+        _lobbyInputs = new LobbyInputs();
+        
+        _lobbyInputs.LobbyMap.Next.performed += OnNext;
+        _lobbyInputs.LobbyMap.Previous.performed += OnPrevious;
+        _lobbyInputs.LobbyMap.Ready.performed += OnReady;
+        _lobbyInputs.Enable();
+    }
+    private void OnDisable()
+    {
+        _lobbyInputs.Disable();
+    }
+    
     public void OnNext(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            
-        }
+ 
     }
     
     public void OnPrevious(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            
-        }
+
+    }
+
+    public void OnReady(InputAction.CallbackContext ctx)
+    {
+        // Debug.Log("Ready Button Pressed");
+        // Toggle the player's ready state
+        Player.IsReady = !Player.IsReady;
+        
+        // Parse player to Json
+        string serializedPlayer = JsonUtility.ToJson(Player);
+        
+        // Get LobbyUI's photonView and call the RPC to update the ready state for all players
+        PhotonView lobbyUIPhotonView = LobbyManager.Instance.photonView;
+        lobbyUIPhotonView.RPC("CheckIfReady", RpcTarget.AllBuffered, serializedPlayer);
     }
 }
