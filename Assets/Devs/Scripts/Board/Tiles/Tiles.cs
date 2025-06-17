@@ -12,10 +12,6 @@ public class Tiles : MonoBehaviour
 
     public virtual Transform GetNextTile(BoardPlayers player = null)
     {
-        if (_nextTile.GetComponent<IntersectionTile>() != null)
-        {
-            _nextTile.GetComponent<IntersectionTile>().StartSelectingArrows(player);
-        }
         return _nextTile;
     }
 }

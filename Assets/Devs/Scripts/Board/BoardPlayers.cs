@@ -1,16 +1,23 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class BoardPlayers : MonoBehaviour
 {
     public float WaitTime;
 
-    private IntersectionTile _intersection;
-    private Tiles _lastTile;
-
+    // Turn logic
     private bool _myTurn;
+    private int _movesLeft;
+    private Coroutine _movingRoutine;
+    private Transform _nextTilePosition;
+    private Tiles _lastTile;
+    private IntersectionTile _intersection;
+
+    // Misc
     private Board _controls;
 
     private void OnEnable()
@@ -20,7 +27,7 @@ public class BoardPlayers : MonoBehaviour
 
         _controls.Intersection.SelectRight.performed += SelectRightArrow;
         _controls.Intersection.SelectLeft.performed += SelectLeftArrow;
-        _controls.Intersection.SelectOption.performed += SelecIntersectionOption;
+        _controls.Intersection.SelectOption.performed += SelectIntersectionOption;
 
         _controls.Turn.Select.performed += SelectTurnOption;
         _controls.Turn.Down.performed += NextOption;
@@ -36,6 +43,7 @@ public class BoardPlayers : MonoBehaviour
     {
         StartCoroutine(Wait());
         _controls.Disable();
+        _lastTile = FindAnyObjectByType<StartingTile>();
     }
 
     private IEnumerator Wait()
@@ -78,6 +86,55 @@ public class BoardPlayers : MonoBehaviour
         
     }
 
+    public void UseDice()
+    {
+        int randomDiceNumber = Random.Range(1, 7);
+        _movesLeft = randomDiceNumber;
+        print(randomDiceNumber);
+        print("Starting moving!");
+        MoveLogic();
+    }
+
+    private void MoveLogic()
+    {
+        if (_movesLeft > 0 && _movingRoutine == null)
+        {
+            _movingRoutine = StartCoroutine(Move());
+        }
+        else if (_movesLeft <= 0)
+        {
+            print("Done moving!");
+            // _myTurn = false;
+            Collider[] otherPlayers = Physics.OverlapSphere(transform.position, 2);
+            BoardgameManager.Instance.NextTurn();
+        }
+    }
+
+    private IEnumerator Move(bool useIntersection = false)
+    {
+        if (useIntersection)
+        {
+            _nextTilePosition = _intersection.GetNextTile(this);
+        }
+        else
+        {
+            _nextTilePosition = _lastTile.GetNextTile(this);
+        }
+        if (_nextTilePosition != null)
+        {
+            _lastTile = _nextTilePosition.GetComponent<Tiles>();
+            while (Vector3.Distance(transform.position, _nextTilePosition.position) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 0.5f);
+                yield return new WaitForEndOfFrame();
+            }
+            _movingRoutine = null;
+            _movesLeft--;
+            MoveLogic();
+            yield return null;
+        }
+    }
+
     public void StartDirectionSelection(IntersectionTile intersection)
     {
         _controls.Intersection.Enable();
@@ -95,9 +152,9 @@ public class BoardPlayers : MonoBehaviour
         _intersection.SelectLeftArrow();
     }
 
-    private void SelecIntersectionOption(InputAction.CallbackContext context)
+    private void SelectIntersectionOption(InputAction.CallbackContext context)
     {
-        _intersection.GetNextTile();
+        _movingRoutine = StartCoroutine(Move(true));
     }
 
     private void OnGUI()
@@ -106,7 +163,7 @@ public class BoardPlayers : MonoBehaviour
         {
             if (GUI.Button(new Rect(50, 100, 200, 75), name + "'s Turn"))
             {
-                BoardgameManager.Instance.NextTurn();
+                UseDice();
                 _myTurn = false;
             }
         }
