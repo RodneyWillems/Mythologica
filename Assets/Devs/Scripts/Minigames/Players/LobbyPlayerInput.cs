@@ -14,11 +14,18 @@ public class LobbyPlayerInput : MonoBehaviourPun
     private VisualElement _playerObject;
     
     private LobbyInputs _lobbyInputs;
+    
+    private PlayermodelClass previousModel;
     private void Start()
     {
         Player = LobbyManager.Instance.GetPlayerClass(photonView);
         
         _playerObject = LobbyManager.Instance.GetPlayerObject(Player);
+        
+        Player.Playermodel = LobbyManager.Instance.GetStartingPlayerModel(Player);
+        previousModel = Player.Playermodel;
+        
+        _playerObject.Q<VisualElement>("Icon").style.backgroundImage = Player.Playermodel.Icon;
     }
 
     private void OnEnable()
@@ -37,7 +44,7 @@ public class LobbyPlayerInput : MonoBehaviourPun
     
     public void OnNext(InputAction.CallbackContext ctx)
     {
- 
+        
     }
     
     public void OnPrevious(InputAction.CallbackContext ctx)

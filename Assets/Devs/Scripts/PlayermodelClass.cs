@@ -5,6 +5,6 @@ using UnityEngine;
 public class PlayermodelClass
 {
     public GameObject Model;
-    public Texture Icon;
+    public Texture2D Icon;
     public bool IsSelected = false;
 }

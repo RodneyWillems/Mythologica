@@ -78,6 +78,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         _playerObjects[playerClass.Id].Q<Label>("PlayerName").text = playerClass.Name;
         return _playerObjects[playerClass.Id];
     }
+    
+    /// <summary>
+    /// Only call this method at the start of the game to get a player model that is not yet selected.
+    /// </summary>
+    public PlayermodelClass GetStartingPlayerModel(PlayerClass playerClass)
+    {
+        foreach (PlayermodelClass model in ModelOptions)
+        {
+            if (model.IsSelected == false)
+            {
+                model.IsSelected = true;
+                return model;
+            }
+        }
+        
+        Debug.LogWarning("No available player models found.");
+        return null; // Return null or handle the case where no models are available
+    }
+    
     [PunRPC]
     public void CheckIfReady(string serializedPlayer)
     {

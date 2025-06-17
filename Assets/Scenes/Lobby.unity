@@ -187,18 +187,19 @@ MonoBehaviour:
   Players: []
   UiDoc: {fileID: 0}
   ReadyCount: 0
+  _amountOfReadyPlayersNeeded: 1
   ModelOptions:
-  - Model: {fileID: 0}
-    Icon: {fileID: 2800000, guid: 5e34e7014e929fc47bf61b977e103212, type: 3}
+  - Model: {fileID: 919132149155446097, guid: 5240127c6dbf6c348a1491a189b624a6, type: 3}
+    Icon: {fileID: 2800000, guid: c9c6c38d81c581943bec088051669892, type: 3}
     IsSelected: 0
-  - Model: {fileID: 0}
-    Icon: {fileID: 2800000, guid: 11da878917aca074bab7f7c181f2a802, type: 3}
+  - Model: {fileID: 919132149155446097, guid: ad1b162e5617d664594cfbded91b5b8d, type: 3}
+    Icon: {fileID: 2800000, guid: 705587d22561d514d9b9d8a75b5082a2, type: 3}
     IsSelected: 0
-  - Model: {fileID: 0}
-    Icon: {fileID: 2800000, guid: f1991a8bb35157740bcce6410bb0af2d, type: 3}
+  - Model: {fileID: 919132149155446097, guid: 82c64b50d84dc4545be0ec8dad3ac666, type: 3}
+    Icon: {fileID: 2800000, guid: 7e8918350bff7d54786c3071a43697e4, type: 3}
     IsSelected: 0
-  - Model: {fileID: 0}
-    Icon: {fileID: 2800000, guid: fcc890246b25c1744841e3a33ef8fe56, type: 3}
+  - Model: {fileID: 919132149155446097, guid: adf225cf34fa819489c9d888e5c95002, type: 3}
+    Icon: {fileID: 2800000, guid: 80ecccb602f230545a0069b4f68d4c28, type: 3}
     IsSelected: 0
 --- !u!114 &1148391040
 MonoBehaviour:
