@@ -161,7 +161,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             if (countdown <= 1)
             {
                 Debug.Log("Loading Scene");
-                PhotonNetwork.LoadLevel("Rodney");
+                PhotonNetwork.LoadLevel("Board");
             }
             countdown -= 1;
         }

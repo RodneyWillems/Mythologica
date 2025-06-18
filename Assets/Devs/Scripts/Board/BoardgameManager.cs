@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum TurnOrder
@@ -12,7 +13,7 @@ public enum TurnOrder
     Player4,
 }
 
-public class BoardgameManager : MonoBehaviour
+public class BoardgameManager : MonoBehaviourPunCallbacks
 {
     public static BoardgameManager Instance { get; private set; }
 
@@ -38,6 +39,13 @@ public class BoardgameManager : MonoBehaviour
 
     private void Start()
     {
+        string playerName = DataManager.Instance.MyPlayerClass.Name + "Player";
+        GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
+
+        StartingTile startingTile = FindAnyObjectByType<StartingTile>();
+        spawnedPlayer.transform.position = startingTile.transform.position;
+        startingTile.LandOnTile(spawnedPlayer.GetComponent<BoardPlayers>());
+        
         _turnOrder = TurnOrder.Player1;
         _playerData = new PlayerData[4];
         for (int i = 0; i < 4; i++)
@@ -56,6 +64,7 @@ public class BoardgameManager : MonoBehaviour
         _playerData[_boardPlayers.Count - 1].PlayerObject = player.gameObject;
     }
 
+    [PunRPC]
     private void TurnHandler()
     {
         switch (_turnOrder)
@@ -108,6 +117,7 @@ public class BoardgameManager : MonoBehaviour
         m_minigameTime = true;
     }
 
+    [PunRPC]
     public void RestartOrder()
     {
         m_minigameTime = false;
@@ -119,13 +129,15 @@ public class BoardgameManager : MonoBehaviour
     {
         if(GUI.Button(new Rect(50, 200, 200, 75), "Start Turn Handling"))
         {
-            TurnHandler();
+            photonView.RPC("TurnHandler", RpcTarget.AllBuffered);
+            // TurnHandler();
         }
         if (m_minigameTime)
         {
             if (GUI.Button(new Rect(50, 100, 200, 75), "Restart order"))
             {
-                RestartOrder(); 
+                photonView.RPC("RestartOrder", RpcTarget.AllBuffered);
+                // RestartOrder(); 
             }
         }
     }

@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class BoardPlayers : MonoBehaviour
+public class BoardPlayers : MonoBehaviourPun
 {
     public float WaitTime;
 
@@ -40,9 +41,15 @@ public class BoardPlayers : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Wait());
+        // StartCoroutine(Wait());
+        BoardgameManager.Instance.AddPlayer(this);
         _controls.Disable();
         _lastTile = FindAnyObjectByType<StartingTile>();
+
+        if (photonView.IsMine)
+        {
+            _turnButtons = GameObject.Find("Player " + DataManager.Instance.MyPlayerClass.Id);
+        }
     }
 
     private IEnumerator Wait()

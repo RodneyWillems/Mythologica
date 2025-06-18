@@ -26,6 +26,8 @@ public class LobbyPlayerInput : MonoBehaviourPun
         previousModel = Player.Playermodel;
         
         _playerObject.Q<VisualElement>("Icon").style.backgroundImage = Player.Playermodel.Icon;
+        
+        DataManager.Instance.MyPlayerClass = Player;
     }
 
     private void OnEnable()
