@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1148391038}
   - component: {fileID: 1148391037}
   - component: {fileID: 1148391039}
+  - component: {fileID: 1148391040}
   m_Layer: 5
   m_Name: LobbyUI
   m_TagString: Untagged
@@ -183,44 +184,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe263a7fb8994e94da565ef11fc7f982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiDocument: {fileID: 0}
---- !u!1 &1501176403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1501176406}
-  - component: {fileID: 1501176405}
-  - component: {fileID: 1501176404}
-  m_Layer: 0
-  m_Name: LobbyPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1501176404
+  Players: []
+  UiDoc: {fileID: 0}
+  ReadyCount: 0
+  _amountOfReadyPlayersNeeded: 2
+  ModelOptions:
+  - Model: {fileID: 919132149155446097, guid: 5240127c6dbf6c348a1491a189b624a6, type: 3}
+    Icon: {fileID: 2800000, guid: c9c6c38d81c581943bec088051669892, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 919132149155446097, guid: ad1b162e5617d664594cfbded91b5b8d, type: 3}
+    Icon: {fileID: 2800000, guid: 705587d22561d514d9b9d8a75b5082a2, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 919132149155446097, guid: 82c64b50d84dc4545be0ec8dad3ac666, type: 3}
+    Icon: {fileID: 2800000, guid: 7e8918350bff7d54786c3071a43697e4, type: 3}
+    IsSelected: 0
+  - Model: {fileID: 919132149155446097, guid: adf225cf34fa819489c9d888e5c95002, type: 3}
+    Icon: {fileID: 2800000, guid: 80ecccb602f230545a0069b4f68d4c28, type: 3}
+    IsSelected: 0
+--- !u!114 &1148391040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501176403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f70018929cba402489d80ae87bcd17af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1501176405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501176403}
+  m_GameObject: {fileID: 1148391036}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -236,21 +223,6 @@ MonoBehaviour:
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!4 &1501176406
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501176403}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1547510217
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,4 +488,3 @@ SceneRoots:
   - {fileID: 2103075307}
   - {fileID: 1547510219}
   - {fileID: 1148391038}
-  - {fileID: 1501176406}

@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerData : MonoBehaviour
+public class PlayerData 
 {
-    public string PlayerName;
-    public GameObject PlayerObject;
-    public int Obols;
-    public int Ambrosias;
-    public Item[] Items;
+    public string PlayerName = null;
+    public GameObject PlayerObject = null;
+    public int Obols = 0;
+    public int Ambrosias = 0;
+    public List<Item> Items = new();
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -6,15 +7,15 @@ using UnityEngine;
 public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     public static MultiplayerManager instance;
-    
+
     [SerializeField] private byte _maxPlayersPerRoom = 4;
-    
+
     private string _gameVersion = "1.0";
 
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        
+
         // Singleton pattern to ensure only one instance of MultiplayerManager exists
         if (instance != this && instance != null)
         {
@@ -26,7 +27,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             DontDestroyOnLoad(gameObject);
         }
     }
-    
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
@@ -41,18 +42,11 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError("Not the Master Client");
-            return;
-        }
-        else
-        {
-            SceneManager.instance.LoadSceneOnline("Lobby");
-        }
+
+        PhotonNetwork.LoadLevel("Lobby");
     }
-    
-    public override void OnJoinRandomFailed(short returnCode, string message)
+
+public override void OnJoinRandomFailed(short returnCode, string message)
     {
         base.OnJoinRandomFailed(returnCode, message);
     }
@@ -83,6 +77,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = _maxPlayersPerRoom;
+        roomOptions.PlayerTtl = 30 * 60 * 1000;  // 30 minutes in millisecond 
         
         PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
@@ -99,8 +94,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 300, 30), PhotonNetwork.PlayerList.Length.ToString());
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(10, 10, 300, 30), PhotonNetwork.CurrentRoom.PlayerCount.ToString());
+    // }
 }
