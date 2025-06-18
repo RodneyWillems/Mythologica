@@ -100,4 +100,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextTile: {fileID: 0}
-  _coinsAdded: 0
+  _coinsAdded: 3
+  _moveAway: 7

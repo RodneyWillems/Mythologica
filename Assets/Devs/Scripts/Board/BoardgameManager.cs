@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
@@ -103,7 +104,15 @@ public class BoardgameManager : MonoBehaviour
     private void MinigameDecider()
     {
         print("Idfk man just go play a minigame already");
+        PhotonNetwork.LoadLevel("Minigame 1");
         m_minigameTime = true;
+    }
+
+    public void RestartOrder()
+    {
+        m_minigameTime = false;
+        _turnOrder = TurnOrder.Player1;
+        TurnHandler();
     }
 
     private void OnGUI()
@@ -116,9 +125,7 @@ public class BoardgameManager : MonoBehaviour
         {
             if (GUI.Button(new Rect(50, 100, 200, 75), "Restart order"))
             {
-                m_minigameTime = false;
-                _turnOrder = TurnOrder.Player1;
-                TurnHandler();
+                RestartOrder(); 
             }
         }
     }
@@ -129,6 +136,7 @@ public class BoardgameManager : MonoBehaviour
         {
             if (player == _boardPlayers[i])
             {
+                print(player.name + " gained " + amount + " obols!");
                 _playerData[i].Obols += amount;
                 break;
             }
