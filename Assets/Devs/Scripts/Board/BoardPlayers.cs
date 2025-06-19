@@ -84,12 +84,13 @@ public class BoardPlayers : MonoBehaviourPun
     public void UseDice()
     {
         if(!photonView.IsMine) {return;}
-        int randomDiceNumber = Random.Range(1, 7);
+        int randomDiceNumber = Random.Range(3, 3);
         _movesLeft = randomDiceNumber;
         _turnButtons.SetActive(false);
-        MoveLogic();
+        photonView.RPC("MoveLogic", RpcTarget.AllBuffered);
     }
 
+    [PunRPC]
     private void MoveLogic()
     {
         if (_movesLeft > 0 && _movingRoutine == null)
@@ -99,7 +100,7 @@ public class BoardPlayers : MonoBehaviourPun
         else if (_movesLeft <= 0)
         {
             _lastTile.LandOnTile(this);
-            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.All);
+            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.AllBuffered);
         }
     }
 
@@ -118,12 +119,12 @@ public class BoardPlayers : MonoBehaviourPun
             _lastTile = _nextTilePosition.GetComponent<Tiles>();
             while (Vector3.Distance(transform.position, _nextTilePosition.position) > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 2 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 25 * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
             _movingRoutine = null;
             _movesLeft--;
-            MoveLogic();
+            photonView.RPC("MoveLogic", RpcTarget.AllBuffered);
             yield return null;
         }
     }
@@ -137,7 +138,7 @@ public class BoardPlayers : MonoBehaviourPun
     {
         while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, position, 25 * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
         _movingRoutine = null;
