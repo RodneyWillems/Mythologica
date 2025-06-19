@@ -79,7 +79,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         _playerData[_boardPlayers.Count - 1].PlayerObject = player.gameObject;
     }
 
-    [PunRPC]
+    
     private void TurnHandler()
     {
         switch (_turnOrder)
@@ -105,6 +105,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
     public void NextTurn()
     {
         foreach(BoardPlayers player in _boardPlayers)
