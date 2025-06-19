@@ -105,10 +105,10 @@ public class BoardPlayers : MonoBehaviourPun
         }
         else if (_movesLeft <= 0)
         {
-            string serializedTile = JsonUtility.ToJson(_lastTile);
-            string serializedPlayer = JsonUtility.ToJson(this);
+            string tileName = _lastTile.name;
+            string playerName = name;
             
-            BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, serializedTile, serializedPlayer);
+            BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, tileName, playerName);
             BoardgameManager.Instance.NextTurn();
         }
     }

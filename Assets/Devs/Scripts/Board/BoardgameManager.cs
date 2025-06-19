@@ -106,12 +106,18 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void LandOnTile(string tile, string player)
+    public void LandOnTile(string tileName, string playerName)
     {
-        Tiles receivedTile = JsonUtility.FromJson<Tiles>(tile);
-        BoardPlayers receivedPlayer = JsonUtility.FromJson<BoardPlayers>(player);
+        Tiles tile = GameObject.Find(tileName)?.GetComponent<Tiles>();
+        BoardPlayers player = GameObject.Find(playerName)?.GetComponent<BoardPlayers>();
+
+        if (tile == null || player == null)
+        {
+            Debug.LogError($"Failed to resolve Tile ({tileName}) or Player ({playerName})!");
+            return;
+        }
         
-        receivedTile.LandOnTile(receivedPlayer);
+        tile.LandOnTile(player);
     }
     
     [PunRPC]

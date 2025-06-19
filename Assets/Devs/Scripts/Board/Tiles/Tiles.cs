@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using Photon.Realtime;
 
+[Serializable]
 public class Tiles : MonoBehaviour
 {
     [SerializeField] protected Transform _nextTile;
     [SerializeField] protected int _coinsAdded;
     [SerializeField] protected int _moveAway;
 
-    private List<BoardPlayers> _playersOnTile = new();
+    [SerializeField] protected List<BoardPlayers> _playersOnTile = new();
 
     public virtual void LandOnTile(BoardPlayers player)
     {
