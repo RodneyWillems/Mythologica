@@ -82,19 +82,19 @@ public class BoardPlayers : MonoBehaviourPun
         // Play sad animation
     }
 
-    public void UseDiceButton()
-    {
-        if (!photonView.IsMine) { return; }
-        photonView.RPC("UseDice", RpcTarget.AllBuffered);
-    }
-    
     public void UseDice()
     {
         if (!photonView.IsMine) { return; }
-        int randomDiceNumber = Random.Range(3, 3);
+        int randomDiceNumber = Random.Range(1, 7);
         _movesLeft = randomDiceNumber;
-        _turnButtons.SetActive(false);
+        photonView.RPC("DisableButtons", RpcTarget.AllBuffered);
         MoveLogic();
+    }
+
+    [PunRPC]
+    private void DisableButtons()
+    {
+        _turnButtons.SetActive(false);
     }
     
     private void MoveLogic()

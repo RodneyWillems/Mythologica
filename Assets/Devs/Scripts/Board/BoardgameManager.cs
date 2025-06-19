@@ -146,7 +146,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         print("Idfk man just go play a minigame already");
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("Minigame 1");
+            //PhotonNetwork.LoadLevel("Minigame 1");
             m_minigameTime = true;
         }
     }
