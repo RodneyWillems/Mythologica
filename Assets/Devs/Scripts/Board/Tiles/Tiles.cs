@@ -22,7 +22,7 @@ public class Tiles : MonoBehaviour
     {
         foreach (BoardPlayers player in _playersOnTile)
         {
-            player.CorrectPosition(transform.position + Vector3.right * _playersOnTile.Count * _moveAway);
+            player.CorrectPosition(transform.position + Vector3.right * (_playersOnTile.Count - 1) * _moveAway);
         }
     }
 
