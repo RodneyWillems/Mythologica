@@ -104,6 +104,12 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
                 break;
         }
     }
+
+    [PunRPC]
+    public void LandOnTile(Tiles tile, BoardPlayers player)
+    {
+        tile.LandOnTile(player);
+    }
     
     [PunRPC]
     public void NextTurn()
