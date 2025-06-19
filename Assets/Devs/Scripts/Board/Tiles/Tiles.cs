@@ -17,12 +17,27 @@ public class Tiles : MonoBehaviourPun
     public virtual void LandOnTile(BoardPlayers player)
     {
         player.AddCoins(_coinsAdded);
-        _playersOnTile.Add(player);
-        ArrangePlayers();
+        StartArrangingPlayers(player);
     }
 
-    protected virtual void ArrangePlayers()
+    private void StartArrangingPlayers(BoardPlayers player)
     {
+        string tileName = name;
+        string playerName = player.name;
+        BoardgameManager.Instance.photonView.RPC("ArrangePlayers", RpcTarget.AllBuffered, tileName, playerName);
+    }
+
+    public virtual void ArrangePlayers(BoardPlayers player)
+    {
+        if (_playersOnTile.Contains(player))
+        {
+            _playersOnTile.Remove(player);
+        }
+        else
+        {
+            _playersOnTile.Add(player);
+        }
+
         for (int i = 0; i < _playersOnTile.Count; i++)
         {
             _playersOnTile[i].CorrectPosition(transform.position + Vector3.right * i * _moveAway);
@@ -31,11 +46,7 @@ public class Tiles : MonoBehaviourPun
 
     public virtual Transform GetNextTile(BoardPlayers player = null)
     {
-        if (_playersOnTile.Contains(player))
-        {
-            _playersOnTile.Remove(player);
-            ArrangePlayers();
-        }
+        StartArrangingPlayers(player);
         return _nextTile;
     }
 }

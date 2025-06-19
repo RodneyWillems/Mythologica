@@ -119,6 +119,21 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         
         tile.LandOnTile(player);
     }
+
+    [PunRPC]
+    public void ArrangePlayers(string tileName, string playerName)
+    {
+        Tiles tile = GameObject.Find(tileName)?.GetComponent<Tiles>();
+        BoardPlayers player = GameObject.Find(playerName)?.GetComponent<BoardPlayers>();
+
+        if (tile == null || player == null)
+        {
+            Debug.LogError($"Failed to resolve Tile ({tileName}) or Player ({playerName})!");
+            return;
+        }
+
+        tile.ArrangePlayers(player);
+    }
     
     [PunRPC]
     public void NextTurn()

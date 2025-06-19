@@ -38,6 +38,7 @@ public class IntersectionTile : Tiles
     [PunRPC]
     private void RemoveArrows()
     {
+        ArrangePlayers(_recentPlayer);
         _firstTime = true;
         _arrowLeft.gameObject.SetActive(false);
         _arrowRight.gameObject.SetActive(false);
