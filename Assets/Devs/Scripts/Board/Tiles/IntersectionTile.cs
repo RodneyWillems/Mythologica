@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class IntersectionTile : Tiles
 {
@@ -15,26 +16,32 @@ public class IntersectionTile : Tiles
     {
         if (_firstTime)
         {
+            photonView.RPC("StartSelectingArrows", RpcTarget.AllBuffered, player);
             StartSelectingArrows(player);
             _firstTime = false;
             return null;
         }
         else if (_selectedArrow == 1)
         {
-            _firstTime = true;
-            _arrowLeft.gameObject.SetActive(false);
-            _arrowRight.gameObject.SetActive(false);
+            photonView.RPC("RemoveArrows", RpcTarget.AllBuffered);
             return _rightTile;
         }
         else
         {
-            _firstTime = true;
-            _arrowLeft.gameObject.SetActive(false);
-            _arrowRight.gameObject.SetActive(false);
+            photonView.RPC("RemoveArrows", RpcTarget.AllBuffered);
             return _leftTile;
         }
     }
 
+    [PunRPC]
+    private void RemoveArrows()
+    {
+        _firstTime = true;
+        _arrowLeft.gameObject.SetActive(false);
+        _arrowRight.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
     public void StartSelectingArrows(BoardPlayers player)
     {
         _arrowLeft.gameObject.SetActive(true);
@@ -43,6 +50,7 @@ public class IntersectionTile : Tiles
         SelectLeftArrow();
     }
 
+    [PunRPC]
     public void SelectLeftArrow()
     {
         _selectedArrow = 0;
@@ -50,6 +58,7 @@ public class IntersectionTile : Tiles
         _arrowRight.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     }
 
+    [PunRPC]
     public void SelectRightArrow()
     {
         _selectedArrow = 1;

@@ -133,11 +133,110 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""51ce7196-fec0-40ab-853d-688d48a07499"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
+                    ""action"": ""SelectOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3763e1e2-727d-40a2-9886-f49e876f1255"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PS"",
+                    ""action"": ""SelectOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0aec825-3eda-4f12-abad-8afc3d2225b1"",
+                    ""path"": ""<SwitchProControllerHID>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0af404cc-9c49-4755-9202-ddd614447818"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65873aaf-8511-4e3f-8d6b-afb7ffdf69dd"",
+                    ""path"": ""<SwitchProControllerHID>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95b6759f-e17f-4a5c-b213-f43df6fe33a8"",
+                    ""path"": ""<SwitchProControllerHID>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61e206b8-7418-493c-987e-b411b5da1343"",
+                    ""path"": ""<DualShockGamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PS"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc1462e1-8af8-4ee2-8ea4-af1a2b7cb46a"",
+                    ""path"": ""<DualShockGamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PS"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5353b371-55f5-495e-ba7e-1e9d12fbc8b4"",
+                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e03b82bd-9c54-45de-9169-3078dc669329"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
                     ""action"": ""SelectLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -152,72 +251,70 @@ public partial class @Board: IInputActionCollection2, IDisposable
                     ""action"": ""SelectRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Turn"",
-            ""id"": ""45544441-244a-4f3b-b9a2-708be5b866d3"",
-            ""actions"": [
-                {
-                    ""name"": ""Select"",
-                    ""type"": ""Button"",
-                    ""id"": ""a9d55191-9c2e-4bc5-8275-89c427834361"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
-                {
-                    ""name"": ""Down"",
-                    ""type"": ""Button"",
-                    ""id"": ""de21216b-3b3e-49c1-9861-7f8fa1f6e937"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Up"",
-                    ""type"": ""Button"",
-                    ""id"": ""c7ec7eba-d49a-4898-83d4-0ecad28ce988"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""73b59d24-eb3f-4528-924d-b2281459c410"",
-                    ""path"": """",
+                    ""id"": ""c9456234-9668-484c-9ac6-593d68171b29"",
+                    ""path"": ""<SwitchProControllerHID>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
+                    ""groups"": "";Switch"",
+                    ""action"": ""SelectRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bd3ec0c9-d4f4-466d-accd-b38bb7f2c5e4"",
-                    ""path"": """",
+                    ""id"": ""ed1e7ea5-d252-48c7-b2a0-9d6211e65bd9"",
+                    ""path"": ""<SwitchProControllerHID>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Down"",
+                    ""groups"": "";Switch"",
+                    ""action"": ""SelectRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""abe2034c-0bf9-417d-b218-26a48b57d5de"",
-                    ""path"": """",
+                    ""id"": ""d23ea069-2bc5-45b6-a815-18634bfb6d3c"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Up"",
+                    ""groups"": "";PS"",
+                    ""action"": ""SelectRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""598f0be3-898e-4298-94ed-f9b111f39e0f"",
+                    ""path"": ""<NimbusGamepadHid>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PS"",
+                    ""action"": ""SelectRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb0bf437-cd88-408b-a0f6-8e8ef3cbb8d4"",
+                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
+                    ""action"": ""SelectRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35d47a72-d572-487b-bb70-689b55390adc"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
+                    ""action"": ""SelectRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -276,17 +373,11 @@ public partial class @Board: IInputActionCollection2, IDisposable
         m_Intersection_SelectOption = m_Intersection.FindAction("SelectOption", throwIfNotFound: true);
         m_Intersection_SelectLeft = m_Intersection.FindAction("SelectLeft", throwIfNotFound: true);
         m_Intersection_SelectRight = m_Intersection.FindAction("SelectRight", throwIfNotFound: true);
-        // Turn
-        m_Turn = asset.FindActionMap("Turn", throwIfNotFound: true);
-        m_Turn_Select = m_Turn.FindAction("Select", throwIfNotFound: true);
-        m_Turn_Down = m_Turn.FindAction("Down", throwIfNotFound: true);
-        m_Turn_Up = m_Turn.FindAction("Up", throwIfNotFound: true);
     }
 
     ~@Board()
     {
         UnityEngine.Debug.Assert(!m_Intersection.enabled, "This will cause a leak and performance issues, Board.Intersection.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Turn.enabled, "This will cause a leak and performance issues, Board.Turn.Disable() has not been called.");
     }
 
     /// <summary>
@@ -476,124 +567,6 @@ public partial class @Board: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="IntersectionActions" /> instance referencing this action map.
     /// </summary>
     public IntersectionActions @Intersection => new IntersectionActions(this);
-
-    // Turn
-    private readonly InputActionMap m_Turn;
-    private List<ITurnActions> m_TurnActionsCallbackInterfaces = new List<ITurnActions>();
-    private readonly InputAction m_Turn_Select;
-    private readonly InputAction m_Turn_Down;
-    private readonly InputAction m_Turn_Up;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "Turn".
-    /// </summary>
-    public struct TurnActions
-    {
-        private @Board m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public TurnActions(@Board wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Turn/Select".
-        /// </summary>
-        public InputAction @Select => m_Wrapper.m_Turn_Select;
-        /// <summary>
-        /// Provides access to the underlying input action "Turn/Down".
-        /// </summary>
-        public InputAction @Down => m_Wrapper.m_Turn_Down;
-        /// <summary>
-        /// Provides access to the underlying input action "Turn/Up".
-        /// </summary>
-        public InputAction @Up => m_Wrapper.m_Turn_Up;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Turn; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="TurnActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(TurnActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="TurnActions" />
-        public void AddCallbacks(ITurnActions instance)
-        {
-            if (instance == null || m_Wrapper.m_TurnActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_TurnActionsCallbackInterfaces.Add(instance);
-            @Select.started += instance.OnSelect;
-            @Select.performed += instance.OnSelect;
-            @Select.canceled += instance.OnSelect;
-            @Down.started += instance.OnDown;
-            @Down.performed += instance.OnDown;
-            @Down.canceled += instance.OnDown;
-            @Up.started += instance.OnUp;
-            @Up.performed += instance.OnUp;
-            @Up.canceled += instance.OnUp;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="TurnActions" />
-        private void UnregisterCallbacks(ITurnActions instance)
-        {
-            @Select.started -= instance.OnSelect;
-            @Select.performed -= instance.OnSelect;
-            @Select.canceled -= instance.OnSelect;
-            @Down.started -= instance.OnDown;
-            @Down.performed -= instance.OnDown;
-            @Down.canceled -= instance.OnDown;
-            @Up.started -= instance.OnUp;
-            @Up.performed -= instance.OnUp;
-            @Up.canceled -= instance.OnUp;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TurnActions.UnregisterCallbacks(ITurnActions)" />.
-        /// </summary>
-        /// <seealso cref="TurnActions.UnregisterCallbacks(ITurnActions)" />
-        public void RemoveCallbacks(ITurnActions instance)
-        {
-            if (m_Wrapper.m_TurnActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="TurnActions.AddCallbacks(ITurnActions)" />
-        /// <seealso cref="TurnActions.RemoveCallbacks(ITurnActions)" />
-        /// <seealso cref="TurnActions.UnregisterCallbacks(ITurnActions)" />
-        public void SetCallbacks(ITurnActions instance)
-        {
-            foreach (var item in m_Wrapper.m_TurnActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_TurnActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="TurnActions" /> instance referencing this action map.
-    /// </summary>
-    public TurnActions @Turn => new TurnActions(this);
     private int m_KeyboardSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -674,34 +647,5 @@ public partial class @Board: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectRight(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Turn" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="TurnActions.AddCallbacks(ITurnActions)" />
-    /// <seealso cref="TurnActions.RemoveCallbacks(ITurnActions)" />
-    public interface ITurnActions
-    {
-        /// <summary>
-        /// Method invoked when associated input action "Select" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Down" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDown(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Up" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnUp(InputAction.CallbackContext context);
     }
 }

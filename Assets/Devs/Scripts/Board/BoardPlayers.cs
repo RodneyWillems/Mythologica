@@ -162,12 +162,12 @@ public class BoardPlayers : MonoBehaviourPun
 
     private void SelectRightArrow(InputAction.CallbackContext context)
     {
-        _intersection.SelectRightArrow();
+        _intersection.photonView.RPC("SelectRightArrow", RpcTarget.AllBuffered);
     }
 
     private void SelectLeftArrow(InputAction.CallbackContext context)
     {
-        _intersection.SelectLeftArrow();
+        _intersection.photonView.RPC("SelectLeftArrow", RpcTarget.AllBuffered);
     }
 
     private void SelectIntersectionOption(InputAction.CallbackContext context)

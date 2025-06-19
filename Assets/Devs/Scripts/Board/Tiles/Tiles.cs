@@ -3,9 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using Photon.Realtime;
+using Photon.Pun;
 
 [Serializable]
-public class Tiles : MonoBehaviour
+public class Tiles : MonoBehaviourPun
 {
     [SerializeField] protected Transform _nextTile;
     [SerializeField] protected int _coinsAdded;
