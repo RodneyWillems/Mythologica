@@ -41,8 +41,8 @@ public class BoardPlayers : MonoBehaviourPun
 
     private void Start()
     {
-        // StartCoroutine(Wait());
-        BoardgameManager.Instance.AddPlayer(this);
+        StartCoroutine(Wait());
+        // BoardgameManager.Instance.AddPlayer(this);
         _controls.Disable();
         _lastTile = FindAnyObjectByType<StartingTile>();
 
@@ -83,6 +83,7 @@ public class BoardPlayers : MonoBehaviourPun
 
     public void UseDice()
     {
+        if(!photonView.IsMine) {return;}
         int randomDiceNumber = Random.Range(1, 7);
         _movesLeft = randomDiceNumber;
         _turnButtons.SetActive(false);
