@@ -99,7 +99,7 @@ public class BoardPlayers : MonoBehaviourPun
         else if (_movesLeft <= 0)
         {
             _lastTile.LandOnTile(this);
-            BoardgameManager.Instance.NextTurn();
+            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.All);
         }
     }
 

@@ -105,6 +105,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         }
     }
     
+    [PunRPC]
     public void NextTurn()
     {
         foreach(BoardPlayers player in _boardPlayers)
@@ -115,7 +116,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         if (_turnOrder != TurnOrder.Player4)
         {
             _turnOrder = (TurnOrder)(int)_turnOrder + 1;
-            photonView.RPC("TurnHandler", RpcTarget.All);
+            TurnHandler();
         }
         else
         {
