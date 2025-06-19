@@ -56,6 +56,12 @@ public class LobbyPlayerInput : MonoBehaviourPun
 
     public void OnReady(InputAction.CallbackContext ctx)
     {
+        photonView.RPC("DoReadyLogic", RpcTarget.AllBuffered);
+    }
+    
+    [PunRPC]
+    private void DoReadyLogic()
+    {
         // Debug.Log("Ready Button Pressed");
         // Toggle the player's ready state
         Player.IsReady = !Player.IsReady;
