@@ -158,7 +158,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             _countdownElement.visible = true;
             _countdownElement.text = countdown.ToString();
             yield return new WaitForSeconds(1f);
-            if (countdown <= 1 && PhotonNetwork.IsMasterClient)
+            if (countdown <= 1)
             {
                 Debug.Log("Loading Scene");
                 PhotonNetwork.LoadLevel("Board");

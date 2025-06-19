@@ -46,10 +46,13 @@ public class BoardPlayers : MonoBehaviourPun
         _controls.Disable();
         _lastTile = FindAnyObjectByType<StartingTile>();
 
-        if (photonView.IsMine)
-        {
-            _turnButtons = GameObject.Find("Player " + DataManager.Instance.MyPlayerClass.Id);
-        }
+        // if (photonView.IsMine)
+        // {
+        //     _turnButtons = GameObject.Find("Player " + DataManager.Instance.MyPlayerClass.Id);
+        //     _turnButtons.SetActive(false);
+        //     
+        //     _turnButtons.GetComponent<Button>().onClick.AddListener(UseDice);
+        // }
     }
 
     private IEnumerator Wait()

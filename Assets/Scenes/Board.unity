@@ -2184,6 +2184,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: []
+  _playerObjects:
+  - {fileID: 1457951578}
+  - {fileID: 58182870}
+  - {fileID: 421067311}
+  - {fileID: 899859335}
 --- !u!114 &736241504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6614,11 +6619,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2276442681529893302, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
       propertyPath: m_Name
-      value: VaasPlayer
+      value: vaasPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2276442681529893302, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053592936664109907, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
       propertyPath: _turnButtons
@@ -6643,11 +6648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2360632666601403655, guid: 050ebbd9495071b47b4f806805862ba7, type: 3}
       propertyPath: m_Name
-      value: PaalPlayer
+      value: paalPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2360632666601403655, guid: 050ebbd9495071b47b4f806805862ba7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5690583713480373011, guid: 050ebbd9495071b47b4f806805862ba7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6714,13 +6719,17 @@ PrefabInstance:
       propertyPath: _turnButtons
       value: 
       objectReference: {fileID: 1167016849}
+    - target: {fileID: 3012932875288590815, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14285713
+      objectReference: {fileID: 0}
     - target: {fileID: 4915373163191428236, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: m_Name
-      value: HelmPlayer
+      value: helmPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 4915373163191428236, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6645146586723113046, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6728,7 +6737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6645146586723113046, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 6645146586723113046, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6777,11 +6786,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1207768926327888270, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
       propertyPath: m_Name
-      value: HarpPlayer
+      value: harpPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 1207768926327888270, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2014112400862701126, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
       propertyPath: sceneViewId

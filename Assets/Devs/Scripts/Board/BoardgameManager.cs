@@ -19,6 +19,9 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private PlayerData[] _playerData;
+    
+    [SerializeField]
+    private GameObject[] _playerObjects;
 
     private List<BoardPlayers> _boardPlayers = new();
 
@@ -42,13 +45,21 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
-        
-        string playerName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
-        GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
 
-        StartingTile startingTile = FindAnyObjectByType<StartingTile>();
-        spawnedPlayer.transform.position = startingTile.transform.position;
-        startingTile.LandOnTile(spawnedPlayer.GetComponent<BoardPlayers>());
+        string playerModelName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
+        foreach (GameObject playerObject in _playerObjects)
+        {
+            if (playerObject.name == playerModelName)
+            {
+                playerObject.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+            }
+        }
+
+    // GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
+        //
+        // StartingTile startingTile = FindAnyObjectByType<StartingTile>();
+        // spawnedPlayer.transform.position = startingTile.transform.position;
+        // startingTile.LandOnTile(spawnedPlayer.GetComponent<BoardPlayers>());
         
         _turnOrder = TurnOrder.Player1;
         _playerData = new PlayerData[4];
@@ -117,12 +128,8 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     private void MinigameDecider()
     {
         print("Idfk man just go play a minigame already");
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("Minigame 1");
-            m_minigameTime = true;
-        }
+        PhotonNetwork.LoadLevel("Minigame 1");
+        m_minigameTime = true;
     }
 
     [PunRPC]
