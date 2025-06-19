@@ -6646,6 +6646,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8305192395531697306, guid: 050ebbd9495071b47b4f806805862ba7, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2360632666601403655, guid: 050ebbd9495071b47b4f806805862ba7, type: 3}
       propertyPath: m_Name
       value: paalPlayer
