@@ -42,6 +42,7 @@ MonoBehaviour:
   - NextTurn
   - MoveLogic
   - UseDice
+  - LandOnTile
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -106,9 +106,12 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void LandOnTile(Tiles tile, BoardPlayers player)
+    public void LandOnTile(string tile, string player)
     {
-        tile.LandOnTile(player);
+        Tiles receivedTile = JsonUtility.FromJson<Tiles>(tile);
+        BoardPlayers receivedPlayer = JsonUtility.FromJson<BoardPlayers>(player);
+        
+        receivedTile.LandOnTile(receivedPlayer);
     }
     
     [PunRPC]

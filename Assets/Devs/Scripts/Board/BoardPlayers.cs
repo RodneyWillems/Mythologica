@@ -7,19 +7,20 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+[Serializable]
 public class BoardPlayers : MonoBehaviourPun
 {
-    public float WaitTime;
+    [SerializeField] public float WaitTime;
 
     // Turn logic
     [SerializeField] private GameObject _turnButtons;
 
-    private bool _myTurn;
-    private int _movesLeft;
+    [SerializeField] private bool _myTurn;
+    [SerializeField] private int _movesLeft;
     private Coroutine _movingRoutine;
-    private Transform _nextTilePosition;
-    private Tiles _lastTile;
-    private IntersectionTile _intersection;
+    [SerializeField] private Transform _nextTilePosition;
+    [SerializeField] private Tiles _lastTile;
+    [SerializeField] private IntersectionTile _intersection;
 
     // Misc
     private Board _controls;
@@ -104,7 +105,10 @@ public class BoardPlayers : MonoBehaviourPun
         }
         else if (_movesLeft <= 0)
         {
-            BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, _lastTile, this);
+            string serializedTile = JsonUtility.ToJson(_lastTile);
+            string serializedPlayer = JsonUtility.ToJson(this);
+            
+            BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, serializedTile, serializedPlayer);
             BoardgameManager.Instance.NextTurn();
         }
     }
