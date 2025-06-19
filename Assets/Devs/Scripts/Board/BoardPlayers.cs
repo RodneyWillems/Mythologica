@@ -81,6 +81,13 @@ public class BoardPlayers : MonoBehaviourPun
         // Play sad animation
     }
 
+    public void UseDiceButton()
+    {
+        if (!photonView.IsMine) { return; }
+        photonView.RPC("UseDice", RpcTarget.AllBuffered);
+    }
+    
+    [PunRPC]
     public void UseDice()
     {
         if(!photonView.IsMine) {return;}
@@ -100,7 +107,7 @@ public class BoardPlayers : MonoBehaviourPun
         else if (_movesLeft <= 0)
         {
             _lastTile.LandOnTile(this);
-            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.AllBuffered);
+            BoardgameManager.Instance.NextTurn();
         }
     }
 
