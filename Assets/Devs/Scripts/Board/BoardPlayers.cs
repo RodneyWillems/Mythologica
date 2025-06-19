@@ -109,7 +109,7 @@ public class BoardPlayers : MonoBehaviourPun
             string playerName = name;
             
             BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, tileName, playerName);
-            BoardgameManager.Instance.NextTurn();
+            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.AllBuffered);
         }
     }
 

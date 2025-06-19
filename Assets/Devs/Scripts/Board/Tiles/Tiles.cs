@@ -22,9 +22,9 @@ public class Tiles : MonoBehaviour
 
     protected virtual void ArrangePlayers()
     {
-        foreach (BoardPlayers player in _playersOnTile)
+        for (int i = 0; i < _playersOnTile.Count; i++)
         {
-            player.CorrectPosition(transform.position + Vector3.right * (_playersOnTile.Count - 1) * _moveAway);
+            _playersOnTile[i].CorrectPosition(transform.position + Vector3.right * i * _moveAway);
         }
     }
 
