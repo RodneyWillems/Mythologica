@@ -43,7 +43,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.IsMessageQueueRunning = true;
         
-        string playerName = DataManager.Instance.MyPlayerClass.Name + "Player";
+        string playerName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
         GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
 
         StartingTile startingTile = FindAnyObjectByType<StartingTile>();
