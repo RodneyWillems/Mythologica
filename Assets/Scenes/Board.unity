@@ -1576,7 +1576,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 899859340}
         m_TargetAssemblyTypeName: BoardPlayers, Assembly-CSharp
-        m_MethodName: UseDice
+        m_MethodName: UseDiceButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2726,7 +2726,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1457951579}
         m_TargetAssemblyTypeName: BoardPlayers, Assembly-CSharp
-        m_MethodName: UseDice
+        m_MethodName: UseDiceButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3386,7 +3386,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 421067316}
         m_TargetAssemblyTypeName: BoardPlayers, Assembly-CSharp
-        m_MethodName: UseDice
+        m_MethodName: UseDiceButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5409,7 +5409,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 58182875}
         m_TargetAssemblyTypeName: BoardPlayers, Assembly-CSharp
-        m_MethodName: UseDice
+        m_MethodName: UseDiceButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
