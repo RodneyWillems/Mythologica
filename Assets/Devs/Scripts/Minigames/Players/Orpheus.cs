@@ -22,14 +22,14 @@ public class Orpheus : MonoBehaviour
 
     // Misc
     private PlayerInput _playerInput;
-    private Minigames m_controls;
+    private Minigames _controls;
     #endregion
 
     private void OnEnable()
     {
-        m_controls = new();
-        m_controls.Orpheus.Enable();
-        m_controls.Orpheus.Moverock.performed += MoveRock;
+        _controls = new();
+        _controls.Orpheus.Enable();
+        _controls.Orpheus.Moverock.performed += MoveRock;
     }
 
     private void Start()
@@ -46,7 +46,7 @@ public class Orpheus : MonoBehaviour
         }
         // When the player presses a button it checks with the next rock if it's the correct button or not
         Vector2 input = context.ReadValue<Vector2>();
-        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 4, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f, _rockLayer))
+        if (Physics.BoxCast(transform.position, (Vector3.up + Vector3.right) * 3, transform.forward, out RaycastHit hit, Quaternion.identity, 0.7f, _rockLayer))
         {
             if (hit.collider.GetComponent<Rock>().CheckMove(input) && !_failed)
             {
@@ -88,7 +88,7 @@ public class Orpheus : MonoBehaviour
         Vector3 targetPosition = transform.position + transform.forward;
         while (Vector3.Distance(transform.position, targetPosition) >= 0.1f)
         {
-            transform.position += transform.forward / 8;
+            transform.position += transform.forward * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         _movingRoutine = null;

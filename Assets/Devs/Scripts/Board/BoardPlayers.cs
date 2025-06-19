@@ -118,7 +118,7 @@ public class BoardPlayers : MonoBehaviourPun
             _lastTile = _nextTilePosition.GetComponent<Tiles>();
             while (Vector3.Distance(transform.position, _nextTilePosition.position) > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 2 * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
             _movingRoutine = null;
@@ -137,7 +137,7 @@ public class BoardPlayers : MonoBehaviourPun
     {
         while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, 0.3f);
+            transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
         _movingRoutine = null;
