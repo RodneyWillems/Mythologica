@@ -35,10 +35,14 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        
+        PhotonNetwork.IsMessageQueueRunning = false;
     }
 
     private void Start()
     {
+        PhotonNetwork.IsMessageQueueRunning = true;
+        
         string playerName = DataManager.Instance.MyPlayerClass.Name + "Player";
         GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
 
