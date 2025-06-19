@@ -87,17 +87,15 @@ public class BoardPlayers : MonoBehaviourPun
         photonView.RPC("UseDice", RpcTarget.AllBuffered);
     }
     
-    [PunRPC]
     public void UseDice()
     {
-        if(!photonView.IsMine) {return;}
+        if (!photonView.IsMine) { return; }
         int randomDiceNumber = Random.Range(3, 3);
         _movesLeft = randomDiceNumber;
         _turnButtons.SetActive(false);
-        photonView.RPC("MoveLogic", RpcTarget.AllBuffered);
+        MoveLogic();
     }
-
-    [PunRPC]
+    
     private void MoveLogic()
     {
         if (_movesLeft > 0 && _movingRoutine == null)
@@ -131,7 +129,7 @@ public class BoardPlayers : MonoBehaviourPun
             }
             _movingRoutine = null;
             _movesLeft--;
-            photonView.RPC("MoveLogic", RpcTarget.AllBuffered);
+            MoveLogic();
             yield return null;
         }
     }
