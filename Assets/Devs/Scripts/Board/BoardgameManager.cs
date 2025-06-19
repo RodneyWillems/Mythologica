@@ -128,8 +128,11 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     private void MinigameDecider()
     {
         print("Idfk man just go play a minigame already");
-        PhotonNetwork.LoadLevel("Minigame 1");
-        m_minigameTime = true;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("Minigame 1");
+            m_minigameTime = true;
+        }
     }
 
     [PunRPC]
