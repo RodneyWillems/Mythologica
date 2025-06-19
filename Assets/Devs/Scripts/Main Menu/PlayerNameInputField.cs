@@ -9,20 +9,21 @@ using TMPro;
 public class PlayerNameInputField : MonoBehaviour
 {
     const string _playerNamePrefKey = "PlayerName";
-    
+
+    private TMP_InputField _inputField;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         string defaultName = string.Empty;
-        TMP_InputField inputField = this.GetComponent<TMP_InputField>();
+        _inputField = this.GetComponent<TMP_InputField>();
         
-        inputField.onValueChanged.AddListener(SetPlayerName);
-        if (inputField!=null)
+        _inputField.onValueChanged.AddListener(SetPlayerName);
+        if (_inputField!=null)
         {
             if (PlayerPrefs.HasKey(_playerNamePrefKey))
             {
                 defaultName = PlayerPrefs.GetString(_playerNamePrefKey);
-                inputField.text = defaultName;
+                _inputField.text = defaultName;
             }
         }
 
@@ -35,6 +36,12 @@ public class PlayerNameInputField : MonoBehaviour
         if (string.IsNullOrEmpty(value))
         {
             Debug.LogError("Player Name is null or empty");
+            return;
+        }
+        if (value.Length > 12)
+        {
+            _inputField.text =_inputField.text.Remove(12, 1);
+            Debug.LogError("Player Name is too long, must be less than 12 characters");
             return;
         }
         PhotonNetwork.NickName = value;
