@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
+using Photon.Realtime;
 
 public class Tiles : MonoBehaviour
 {
@@ -13,9 +15,13 @@ public class Tiles : MonoBehaviour
     {
         player.AddCoins(_coinsAdded);
         _playersOnTile.Add(player);
-        if (_playersOnTile.Count > 1)
+        ArrangePlayers();
+    }
+
+    protected virtual void ArrangePlayers()
+    {
+        foreach (BoardPlayers player in _playersOnTile)
         {
-            print("THERE'S OTHERS");
             player.CorrectPosition(transform.position + Vector3.right * _playersOnTile.Count * _moveAway);
         }
     }
@@ -25,10 +31,7 @@ public class Tiles : MonoBehaviour
         if (_playersOnTile.Contains(player))
         {
             _playersOnTile.Remove(player);
-            foreach (BoardPlayers fixPlayer in _playersOnTile)
-            {
-                fixPlayer.CorrectPosition(transform.position + Vector3.right * (_playersOnTile.Count - 1) * _moveAway);
-            }
+            ArrangePlayers();
         }
         return _nextTile;
     }
