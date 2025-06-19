@@ -20,7 +20,7 @@ public class Tiles : MonoBehaviourPun
         StartArrangingPlayers(player);
     }
 
-    private void StartArrangingPlayers(BoardPlayers player)
+    protected void StartArrangingPlayers(BoardPlayers player)
     {
         string tileName = name;
         string playerName = player.name;
