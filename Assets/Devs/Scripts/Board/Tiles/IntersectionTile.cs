@@ -9,6 +9,8 @@ public class IntersectionTile : Tiles
     [SerializeField] private Transform _leftTile;
     [SerializeField] private Transform _rightTile;
 
+    private BoardPlayers _recentPlayer;
+
     private int _selectedArrow;
     private bool _firstTime = true;
 
@@ -16,8 +18,8 @@ public class IntersectionTile : Tiles
     {
         if (_firstTime)
         {
-            photonView.RPC("StartSelectingArrows", RpcTarget.AllBuffered, player);
-            StartSelectingArrows(player);
+            _recentPlayer = player;
+            photonView.RPC("StartSelectingArrows", RpcTarget.AllBuffered);
             _firstTime = false;
             return null;
         }
@@ -42,11 +44,11 @@ public class IntersectionTile : Tiles
     }
 
     [PunRPC]
-    public void StartSelectingArrows(BoardPlayers player)
+    public void StartSelectingArrows()
     {
         _arrowLeft.gameObject.SetActive(true);
         _arrowRight.gameObject.SetActive(true);
-        player.StartDirectionSelection(this);
+        _recentPlayer.StartDirectionSelection(this);
         SelectLeftArrow();
     }
 
