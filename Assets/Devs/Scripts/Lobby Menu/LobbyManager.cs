@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
-public class LobbyManager : MonoBehaviourPunCallbacks
+public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static LobbyManager Instance;
     
@@ -43,6 +43,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+    }
+    
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(ReadyCount);
+        }
+        else
+        {
+            // Network player, receive data
+            ReadyCount = (int)stream.ReceiveNext();
+        }
     }
 
     private void OnEnable()
@@ -82,19 +96,35 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     /// <summary>
     /// Only call this method at the start of the game to get a player model that is not yet selected.
     /// </summary>
-    public PlayermodelClass GetStartingPlayerModel(PlayerClass playerClass)
+    
+    // public PlayermodelClass GetStartingPlayerModel(PlayerClass playerClass)
+    // {
+    //     foreach (PlayermodelClass model in ModelOptions)
+    //     {
+    //         if (model.IsSelected == false)
+    //         {
+    //             photonView.RPC("SetModelSelectedState", RpcTarget.AllBuffered, true, model.Model.name);
+    //             return model;
+    //         }
+    //     }
+    //     
+    //     Debug.LogWarning("No available player models found.");
+    //     return null; // Return null or handle the case where no models are available
+    // }
+    //
+    [PunRPC]
+    private void SetModelSelectedState(bool state, string modelName)
     {
         foreach (PlayermodelClass model in ModelOptions)
         {
-            if (model.IsSelected == false)
+            if (model.Model.name == modelName)
             {
-                model.IsSelected = true;
-                return model;
+                model.IsSelected = state;
+                return;
             }
         }
         
-        Debug.LogWarning("No available player models found.");
-        return null; // Return null or handle the case where no models are available
+        Debug.LogWarning($"Model {modelName} not found in ModelOptions.");
     }
     
     [PunRPC]

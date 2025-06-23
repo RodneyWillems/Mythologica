@@ -45,6 +45,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
 
         string playerModelName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
         foreach (GameObject playerObject in _playerObjects)

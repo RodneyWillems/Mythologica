@@ -15,6 +15,7 @@ public class LobbyPlayerInput : MonoBehaviourPun
     
     private LobbyInputs _lobbyInputs;
     
+    [SerializeField]
     private PlayermodelClass previousModel;
     private void Start()
     {
@@ -22,7 +23,7 @@ public class LobbyPlayerInput : MonoBehaviourPun
         
         _playerObject = LobbyManager.Instance.GetPlayerObject(Player);
         
-        Player.Playermodel = LobbyManager.Instance.GetStartingPlayerModel(Player);
+        photonView.RPC("GetStartingPlayerModel", RpcTarget.AllBufferedViaServer);
         previousModel = Player.Playermodel;
         
         _playerObject.Q<VisualElement>("Icon").style.backgroundImage = Player.Playermodel.Icon;
@@ -57,6 +58,20 @@ public class LobbyPlayerInput : MonoBehaviourPun
     public void OnReady(InputAction.CallbackContext ctx)
     {
         photonView.RPC("DoReadyLogic", RpcTarget.AllBuffered);
+    }
+    
+    [PunRPC]
+    public void GetStartingPlayerModel()
+    {
+        foreach (PlayermodelClass model in LobbyManager.Instance.ModelOptions)
+        {
+            if (model.IsSelected == false)
+            {
+                LobbyManager.Instance.photonView.RPC("SetModelSelectedState", RpcTarget.AllBuffered, true, model.Model.name);
+                Player.Playermodel = model;
+                return;
+            }
+        }
     }
     
     [PunRPC]
