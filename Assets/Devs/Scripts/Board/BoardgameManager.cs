@@ -17,15 +17,15 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
 {
     public static BoardgameManager Instance { get; private set; }
 
-    [SerializeField]
-    private PlayerData[] _playerData;
-    
-    [SerializeField]
-    private GameObject[] _playerObjects;
+    [Header("Players")]
+    [SerializeField] private PlayerData[] _playerData;
+    [SerializeField] private GameObject[] _playerObjects;
 
     private List<BoardPlayers> _boardPlayers = new();
 
+    // Turns
     private TurnOrder _turnOrder;
+    private BoardPlayers _lastPlayer;
 
     private void Awake()
     {
@@ -56,12 +56,6 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
             }
         }
 
-    // GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity, 0);
-        //
-        // StartingTile startingTile = FindAnyObjectByType<StartingTile>();
-        // spawnedPlayer.transform.position = startingTile.transform.position;
-        // startingTile.LandOnTile(spawnedPlayer.GetComponent<BoardPlayers>());
-        
         _turnOrder = TurnOrder.Player1;
         _playerData = new PlayerData[4];
         for (int i = 0; i < 4; i++)
@@ -71,6 +65,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
                 Obols = 20
             };
         }
+
     }
 
     public void AddPlayer(BoardPlayers player)
@@ -78,6 +73,11 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         _boardPlayers.Add(player);
         _playerData[_boardPlayers.Count - 1].PlayerName = player.name;
         _playerData[_boardPlayers.Count - 1].PlayerObject = player.gameObject;
+
+        if (_boardPlayers.Count == 4)
+        {
+            photonView.RPC("TurnHandler", RpcTarget.AllBuffered);
+        }
     }
 
     [PunRPC]
@@ -122,7 +122,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void ArrangePlayers(string tileName, string playerName)
+    public void ArrangePlayers(string tileName, string playerName, bool add = false)
     {
         Tiles tile = GameObject.Find(tileName)?.GetComponent<Tiles>();
         BoardPlayers player = GameObject.Find(playerName)?.GetComponent<BoardPlayers>();
@@ -133,7 +133,7 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        tile.ArrangePlayers(player);
+        tile.ArrangePlayers(player, add);
     }
     
     [PunRPC]
@@ -155,7 +155,19 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private bool m_minigameTime;
+    [PunRPC]
+    public void OpenMap(string playerName)
+    {
+        _lastPlayer = GameObject.Find(playerName)?.GetComponent<BoardPlayers>();
+
+        _lastPlayer.transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 0;
+    }
+
+    [PunRPC]
+    public void CloseMap()
+    {
+        _lastPlayer.transform.GetChild(0).GetComponent<CinemachineCamera>().Priority = 1;
+    }
 
     private void MinigameDecider()
     {
@@ -163,33 +175,15 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             //PhotonNetwork.LoadLevel("Minigame 1");
-            m_minigameTime = true;
+            RestartOrder();
         }
     }
 
     [PunRPC]
     public void RestartOrder()
     {
-        m_minigameTime = false;
         _turnOrder = TurnOrder.Player1;
         TurnHandler();
-    }
-
-    private void OnGUI()
-    {
-        if(GUI.Button(new Rect(50, 200, 200, 75), "Start Turn Handling"))
-        {
-            photonView.RPC("TurnHandler", RpcTarget.AllBuffered);
-            // TurnHandler();
-        }
-        if (m_minigameTime)
-        {
-            if (GUI.Button(new Rect(50, 100, 200, 75), "Restart order"))
-            {
-                photonView.RPC("RestartOrder", RpcTarget.AllBuffered);
-                // RestartOrder(); 
-            }
-        }
     }
 
     public void AddCoins(BoardPlayers player, int amount)

@@ -17,7 +17,7 @@ MonoBehaviour:
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
-    AppVersion: 2.0
+    AppVersion: 1.0
     UseNameServer: 1
     FixedRegion: 
     Server: 
@@ -53,7 +53,9 @@ MonoBehaviour:
   - DoReadyLogic
   - GetStartingPlayerModel
   - SetModelSelectedState
-  - AddPlayerToArray
+  - CloseMap
+  - EnableButtons
+  - OpenMap
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

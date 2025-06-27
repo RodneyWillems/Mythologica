@@ -178,7 +178,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""65873aaf-8511-4e3f-8d6b-afb7ffdf69dd"",
-                    ""path"": ""<SwitchProControllerHID>/leftStick/right"",
+                    ""path"": ""<SwitchProControllerHID>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Switch"",
@@ -189,7 +189,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""95b6759f-e17f-4a5c-b213-f43df6fe33a8"",
-                    ""path"": ""<SwitchProControllerHID>/dpad/right"",
+                    ""path"": ""<SwitchProControllerHID>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Switch"",
@@ -200,7 +200,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""61e206b8-7418-493c-987e-b411b5da1343"",
-                    ""path"": ""<DualShockGamepad>/leftStick/right"",
+                    ""path"": ""<DualShockGamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PS"",
@@ -211,7 +211,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bc1462e1-8af8-4ee2-8ea4-af1a2b7cb46a"",
-                    ""path"": ""<DualShockGamepad>/dpad/right"",
+                    ""path"": ""<DualShockGamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PS"",
@@ -222,7 +222,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5353b371-55f5-495e-ba7e-1e9d12fbc8b4"",
-                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""path"": ""<XInputController>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Xbox"",
@@ -233,7 +233,7 @@ public partial class @Board: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e03b82bd-9c54-45de-9169-3078dc669329"",
-                    ""path"": ""<XInputController>/dpad/right"",
+                    ""path"": ""<XInputController>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Xbox"",
@@ -319,6 +319,67 @@ public partial class @Board: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Map"",
+            ""id"": ""a25f013c-7ca4-43a5-8fe0-101af40a3b63"",
+            ""actions"": [
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""4658c0ca-e4ff-4826-9d37-ef0387881063"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6cb74c11-f1ed-4d44-8b61-6524593b775a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb476024-5acc-4bd1-bed1-8cd6e07c6586"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Xbox"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f935270-5b85-4827-8a3e-06c53292bd58"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PS"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66f3ce9e-8b75-411d-b1ca-cf193de5d34d"",
+                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Switch"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -373,11 +434,15 @@ public partial class @Board: IInputActionCollection2, IDisposable
         m_Intersection_SelectOption = m_Intersection.FindAction("SelectOption", throwIfNotFound: true);
         m_Intersection_SelectLeft = m_Intersection.FindAction("SelectLeft", throwIfNotFound: true);
         m_Intersection_SelectRight = m_Intersection.FindAction("SelectRight", throwIfNotFound: true);
+        // Map
+        m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
+        m_Map_Close = m_Map.FindAction("Close", throwIfNotFound: true);
     }
 
     ~@Board()
     {
         UnityEngine.Debug.Assert(!m_Intersection.enabled, "This will cause a leak and performance issues, Board.Intersection.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Map.enabled, "This will cause a leak and performance issues, Board.Map.Disable() has not been called.");
     }
 
     /// <summary>
@@ -567,6 +632,102 @@ public partial class @Board: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="IntersectionActions" /> instance referencing this action map.
     /// </summary>
     public IntersectionActions @Intersection => new IntersectionActions(this);
+
+    // Map
+    private readonly InputActionMap m_Map;
+    private List<IMapActions> m_MapActionsCallbackInterfaces = new List<IMapActions>();
+    private readonly InputAction m_Map_Close;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Map".
+    /// </summary>
+    public struct MapActions
+    {
+        private @Board m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MapActions(@Board wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Map/Close".
+        /// </summary>
+        public InputAction @Close => m_Wrapper.m_Map_Close;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Map; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MapActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MapActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MapActions" />
+        public void AddCallbacks(IMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapActionsCallbackInterfaces.Add(instance);
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MapActions" />
+        private void UnregisterCallbacks(IMapActions instance)
+        {
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapActions.UnregisterCallbacks(IMapActions)" />.
+        /// </summary>
+        /// <seealso cref="MapActions.UnregisterCallbacks(IMapActions)" />
+        public void RemoveCallbacks(IMapActions instance)
+        {
+            if (m_Wrapper.m_MapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MapActions.AddCallbacks(IMapActions)" />
+        /// <seealso cref="MapActions.RemoveCallbacks(IMapActions)" />
+        /// <seealso cref="MapActions.UnregisterCallbacks(IMapActions)" />
+        public void SetCallbacks(IMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MapActions" /> instance referencing this action map.
+    /// </summary>
+    public MapActions @Map => new MapActions(this);
     private int m_KeyboardSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -647,5 +808,20 @@ public partial class @Board: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectRight(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MapActions.AddCallbacks(IMapActions)" />
+    /// <seealso cref="MapActions.RemoveCallbacks(IMapActions)" />
+    public interface IMapActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Close" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClose(InputAction.CallbackContext context);
     }
 }

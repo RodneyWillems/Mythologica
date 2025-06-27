@@ -17,25 +17,28 @@ public class Tiles : MonoBehaviourPun
     public virtual void LandOnTile(BoardPlayers player)
     {
         player.AddCoins(_coinsAdded);
-        StartArrangingPlayers(player);
+        StartArrangingPlayers(player, true);
     }
 
-    protected void StartArrangingPlayers(BoardPlayers player)
+    protected void StartArrangingPlayers(BoardPlayers player, bool add = false)
     {
         string tileName = name;
         string playerName = player.name;
-        BoardgameManager.Instance.photonView.RPC("ArrangePlayers", RpcTarget.AllBuffered, tileName, playerName);
+        BoardgameManager.Instance.photonView.RPC("ArrangePlayers", RpcTarget.AllBuffered, tileName, playerName, add);
     }
 
-    public virtual void ArrangePlayers(BoardPlayers player)
+    public virtual void ArrangePlayers(BoardPlayers player, bool add = false)
     {
-        if (_playersOnTile.Contains(player))
+        if (add)
         {
-            _playersOnTile.Remove(player);
+            _playersOnTile.Add(player);
         }
         else
         {
-            _playersOnTile.Add(player);
+            if (_playersOnTile.Contains(player))
+            {
+                _playersOnTile.Remove(player);
+            }
         }
 
         for (int i = 0; i < _playersOnTile.Count; i++)
