@@ -10,7 +10,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private byte _maxPlayersPerRoom = 4;
 
-    private string _gameVersion = "1.0";
+    private string _gameVersion = "2.0";
 
     private void Awake()
     {

@@ -20,13 +20,13 @@ public class LobbyPlayerInput : MonoBehaviourPun
     private void Start()
     {
         Player = LobbyManager.Instance.GetPlayerClass(photonView);
+        string serializedPlayer = JsonUtility.ToJson(Player);
+        LobbyManager.Instance.photonView.RPC("AddPlayerToArray", RpcTarget.AllBuffered, serializedPlayer);
+        
         
         _playerObject = LobbyManager.Instance.GetPlayerObject(Player);
         
         photonView.RPC("GetStartingPlayerModel", RpcTarget.AllBufferedViaServer);
-        previousModel = Player.Playermodel;
-        
-        _playerObject.Q<VisualElement>("Icon").style.backgroundImage = Player.Playermodel.Icon;
         
         DataManager.Instance.MyPlayerClass = Player;
     }
@@ -57,7 +57,18 @@ public class LobbyPlayerInput : MonoBehaviourPun
 
     public void OnReady(InputAction.CallbackContext ctx)
     {
-        photonView.RPC("DoReadyLogic", RpcTarget.AllBuffered);
+        // photonView.RPC("DoReadyLogic", RpcTarget.AllBuffered);
+        
+        // Debug.Log("Ready Button Pressed");
+        // Toggle the player's ready state
+        Player.IsReady = !Player.IsReady;
+        
+        // Parse player to Json
+        string serializedPlayer = JsonUtility.ToJson(Player);
+        
+        // Get LobbyUI's photonView and call the RPC to update the ready state for all players
+        PhotonView lobbyUIPhotonView = LobbyManager.Instance.photonView; 
+        lobbyUIPhotonView.RPC("CheckIfReady", RpcTarget.AllBuffered, serializedPlayer);
     }
     
     [PunRPC]
@@ -69,6 +80,7 @@ public class LobbyPlayerInput : MonoBehaviourPun
             {
                 LobbyManager.Instance.photonView.RPC("SetModelSelectedState", RpcTarget.AllBuffered, true, model.Model.name);
                 Player.Playermodel = model;
+                _playerObject.Q<VisualElement>("Icon").style.backgroundImage = model.Icon;
                 return;
             }
         }
@@ -82,10 +94,11 @@ public class LobbyPlayerInput : MonoBehaviourPun
         Player.IsReady = !Player.IsReady;
         
         // Parse player to Json
-        string serializedPlayer = JsonUtility.ToJson(Player);
+        int playerId = Player.Id;
+        bool isReady = Player.IsReady;
         
         // Get LobbyUI's photonView and call the RPC to update the ready state for all players
         PhotonView lobbyUIPhotonView = LobbyManager.Instance.photonView;
-        lobbyUIPhotonView.RPC("CheckIfReady", RpcTarget.AllBuffered, serializedPlayer);
+        lobbyUIPhotonView.RPC("CheckIfReady", RpcTarget.AllBuffered, playerId, isReady);
     }
 }

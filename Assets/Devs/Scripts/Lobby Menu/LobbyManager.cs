@@ -6,11 +6,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static LobbyManager Instance;
     
-    public PlayerClass[] Players = new PlayerClass[4];
+    private PlayerClass[] Players = new PlayerClass[4];
     public UIDocument UiDoc;
     public int ReadyCount = 0;
 
@@ -25,6 +27,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
         new PlayermodelClass()
     };
     
+    private int _nextModelIndex = 0; // Index to track the next available model
+    
     // This array holds the visual elements for each player in the lobby.
     private VisualElement[] _playerObjects;
     private Label _countdownElement;
@@ -34,7 +38,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
         
         PhotonNetwork.IsMessageQueueRunning = false;
     }
-
+    
     private void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
@@ -76,12 +80,71 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
         _countdownElement = root.Q<Label>("Counter");
     }
 
-    // public override void OnJoinedRoom()
-    // {
-    //     PhotonNetwork.Instantiate("LobbyPlayer", Vector3.zero, Quaternion.identity, 0);    
-    //     
-    // }
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        
+        AssigModelToPlayer(newPlayer);
+    }
 
+    private void AssigModelToPlayer(Player player)
+    {
+        if (_nextModelIndex >= ModelOptions.Length)
+        {
+            Debug.LogWarning("No more models available to assign.");
+            return;
+        }
+
+        // Assign the next available model
+        PlayermodelClass assignedModel = ModelOptions[_nextModelIndex];
+        assignedModel.IsSelected = true;
+
+        // Update the player's custom properties
+        Hashtable properties = new Hashtable
+        {
+            {"SelectedModel", assignedModel.Model.name}
+        };
+        player.SetCustomProperties(properties);
+
+        Debug.Log($"Assigned model {assignedModel.Model.name} to player {player.NickName}.");
+
+        _nextModelIndex++; // Move to the next model
+    }
+    
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+        
+        // Check if the player has a selected model
+        if (changedProps.ContainsKey("SelectedModel"))
+        {
+            string modelName = (string)changedProps["SelectedModel"];
+            Debug.Log($"Player {targetPlayer.NickName} selected model: {modelName}");
+            
+            // Find the model in ModelOptions
+            foreach (PlayermodelClass model in ModelOptions)
+            {
+                if (model.Model.name == modelName)
+                {
+                    // Update the player's visual element with the selected model
+                    VisualElement playerObject = _playerObjects[targetPlayer.ActorNumber - 1];
+                    playerObject.Q<VisualElement>("Icon").style.backgroundImage = model.Icon;
+                    
+                    model.IsSelected = true;
+                    return;
+                }
+            }
+        }
+    }
+    
+    [PunRPC]
+    public void AddPlayerToArray(string serializedPlayer)
+    {
+        PlayerClass receivedPlayer = JsonUtility.FromJson<PlayerClass>(serializedPlayer);
+        
+        Players[receivedPlayer.Id] = receivedPlayer;
+    }
+    
     public PlayerClass GetPlayerClass(PhotonView photonView)
     {
         PlayerClass playerClass = new PlayerClass(photonView.CreatorActorNr - 1, photonView.Owner.NickName);
