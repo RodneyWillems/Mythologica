@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,10 +11,9 @@ public class BoardPlayers : MonoBehaviourPun
 {
     [SerializeField] public float WaitTime;
 
-    // Turn logic
+    [Header("Turn logic")]
     [SerializeField] private GameObject _turnButtons;
 
-    [SerializeField] private bool _myTurn;
     [SerializeField] private int _movesLeft;
     private Coroutine _movingRoutine;
     [SerializeField] private Transform _nextTilePosition;
@@ -33,6 +31,8 @@ public class BoardPlayers : MonoBehaviourPun
         _controls.Intersection.SelectRight.performed += SelectRightArrow;
         _controls.Intersection.SelectLeft.performed += SelectLeftArrow;
         _controls.Intersection.SelectOption.performed += SelectIntersectionOption;
+
+        _controls.Map.Close.performed += CloseMap;
     }
 
     private void OnDisable()
@@ -43,17 +43,9 @@ public class BoardPlayers : MonoBehaviourPun
     private void Start()
     {
         StartCoroutine(Wait());
-        // BoardgameManager.Instance.AddPlayer(this);
         _controls.Disable();
         _lastTile = FindAnyObjectByType<StartingTile>();
 
-        // if (photonView.IsMine)
-        // {
-        //     _turnButtons = GameObject.Find("Player " + DataManager.Instance.MyPlayerClass.Id);
-        //     _turnButtons.SetActive(false);
-        //     
-        //     _turnButtons.GetComponent<Button>().onClick.AddListener(UseDice);
-        // }
     }
 
     private IEnumerator Wait()
@@ -65,8 +57,7 @@ public class BoardPlayers : MonoBehaviourPun
     public void StartTurn()
     {
         print("It's my turn! (" + name + ")");
-        _myTurn = true;
-        _turnButtons.SetActive(true);
+        photonView.RPC("EnableButtons", RpcTarget.AllBuffered);
         _turnButtons.transform.GetChild(0).GetComponent<Button>().Select();
     }
 
@@ -89,6 +80,12 @@ public class BoardPlayers : MonoBehaviourPun
         _movesLeft = randomDiceNumber;
         photonView.RPC("DisableButtons", RpcTarget.AllBuffered);
         MoveLogic();
+    }
+
+    [PunRPC]
+    private void EnableButtons()
+    {
+        _turnButtons.SetActive(true);
     }
 
     [PunRPC]
@@ -176,4 +173,19 @@ public class BoardPlayers : MonoBehaviourPun
 
         _controls.Intersection.Disable();
     }
+
+    public void OpenMap()
+    {
+        BoardgameManager.Instance.photonView.RPC("OpenMap", RpcTarget.AllBuffered, name);
+        _controls.Map.Enable();
+        photonView.RPC("DisableButtons",RpcTarget.AllBuffered);
+    }
+
+    private void CloseMap(InputAction.CallbackContext context)
+    {
+        BoardgameManager.Instance.photonView.RPC("CloseMap", RpcTarget.AllBuffered);
+        _controls.Map.Disable();
+        _turnButtons.SetActive(true);
+    }
+
 }
