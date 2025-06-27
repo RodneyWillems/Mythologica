@@ -168,6 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitTime: 0.2
   _turnButtons: {fileID: 1695864285}
+  _myTurn: 0
+  _movesLeft: 0
+  _nextTilePosition: {fileID: 0}
+  _lastTile: {fileID: 0}
+  _intersection: {fileID: 0}
 --- !u!65 &58182876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1156,6 +1161,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitTime: 0.3
   _turnButtons: {fileID: 815940578}
+  _myTurn: 0
+  _movesLeft: 0
+  _nextTilePosition: {fileID: 0}
+  _lastTile: {fileID: 0}
+  _intersection: {fileID: 0}
 --- !u!65 &421067317
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2156,6 +2166,7 @@ MonoBehaviour:
   _nextTile: {fileID: 719890661}
   _coinsAdded: 0
   _moveAway: 0
+  _playersOnTile: []
 --- !u!64 &685499863
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2441,6 +2452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: []
+  _playerObjects: []
 --- !u!114 &736241504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2848,6 +2860,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitTime: 0.4
   _turnButtons: {fileID: 1167016849}
+  _myTurn: 0
+  _movesLeft: 0
+  _nextTilePosition: {fileID: 0}
+  _lastTile: {fileID: 0}
+  _intersection: {fileID: 0}
 --- !u!1 &938233820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4709,6 +4726,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitTime: 0.1
   _turnButtons: {fileID: 754017307}
+  _myTurn: 0
+  _movesLeft: 0
+  _nextTilePosition: {fileID: 0}
+  _lastTile: {fileID: 0}
+  _intersection: {fileID: 0}
 --- !u!4 &1457951580
 Transform:
   m_ObjectHideFlags: 0
@@ -5374,6 +5396,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1712687619301058232, guid: c40412474ee00624f82bb9bce57d2d1f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2144372177}
+    - targetCorrespondingSourceObject: {fileID: 1712687619301058232, guid: c40412474ee00624f82bb9bce57d2d1f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2144372178}
   m_SourcePrefab: {fileID: 100100000, guid: c40412474ee00624f82bb9bce57d2d1f, type: 3}
 --- !u!4 &1594977700 stripped
 Transform:
@@ -7716,10 +7741,33 @@ MonoBehaviour:
   _nextTile: {fileID: 0}
   _coinsAdded: 3
   _moveAway: 0
+  _playersOnTile: []
   _arrowLeft: {fileID: 481870158}
   _arrowRight: {fileID: 1329844838}
   _leftTile: {fileID: 536885993}
   _rightTile: {fileID: 2127861556}
+--- !u!114 &2144372178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144372173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &5472471866792123289
 PrefabInstance:
   m_ObjectHideFlags: 0

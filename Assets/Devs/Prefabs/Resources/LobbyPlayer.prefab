@@ -75,3 +75,7 @@ MonoBehaviour:
       Model: {fileID: 0}
       Icon: {fileID: 0}
       IsSelected: 0
+  previousModel:
+    Model: {fileID: 0}
+    Icon: {fileID: 0}
+    IsSelected: 0

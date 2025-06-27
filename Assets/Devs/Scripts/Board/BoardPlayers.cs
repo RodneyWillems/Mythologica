@@ -1,24 +1,24 @@
 using System;
 using System.Collections;
-using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class BoardPlayers : MonoBehaviour
+[Serializable]
+public class BoardPlayers : MonoBehaviourPun
 {
-    public float WaitTime;
+    [SerializeField] public float WaitTime;
 
-    // Turn logic
+    [Header("Turn logic")]
     [SerializeField] private GameObject _turnButtons;
 
-    private bool _myTurn;
-    private int _movesLeft;
+    [SerializeField] private int _movesLeft;
     private Coroutine _movingRoutine;
-    private Transform _nextTilePosition;
-    private Tiles _lastTile;
-    private IntersectionTile _intersection;
+    [SerializeField] private Transform _nextTilePosition;
+    [SerializeField] private Tiles _lastTile;
+    [SerializeField] private IntersectionTile _intersection;
 
     // Misc
     private Board _controls;
@@ -31,6 +31,8 @@ public class BoardPlayers : MonoBehaviour
         _controls.Intersection.SelectRight.performed += SelectRightArrow;
         _controls.Intersection.SelectLeft.performed += SelectLeftArrow;
         _controls.Intersection.SelectOption.performed += SelectIntersectionOption;
+
+        _controls.Map.Close.performed += CloseMap;
     }
 
     private void OnDisable()
@@ -43,6 +45,7 @@ public class BoardPlayers : MonoBehaviour
         StartCoroutine(Wait());
         _controls.Disable();
         _lastTile = FindAnyObjectByType<StartingTile>();
+
     }
 
     private IEnumerator Wait()
@@ -54,8 +57,7 @@ public class BoardPlayers : MonoBehaviour
     public void StartTurn()
     {
         print("It's my turn! (" + name + ")");
-        _myTurn = true;
-        _turnButtons.SetActive(true);
+        photonView.RPC("EnableButtons", RpcTarget.AllBuffered);
         _turnButtons.transform.GetChild(0).GetComponent<Button>().Select();
     }
 
@@ -73,12 +75,25 @@ public class BoardPlayers : MonoBehaviour
 
     public void UseDice()
     {
+        if (!photonView.IsMine) { return; }
         int randomDiceNumber = Random.Range(1, 7);
         _movesLeft = randomDiceNumber;
-        _turnButtons.SetActive(false);
+        photonView.RPC("DisableButtons", RpcTarget.AllBuffered);
         MoveLogic();
     }
 
+    [PunRPC]
+    private void EnableButtons()
+    {
+        _turnButtons.SetActive(true);
+    }
+
+    [PunRPC]
+    private void DisableButtons()
+    {
+        _turnButtons.SetActive(false);
+    }
+    
     private void MoveLogic()
     {
         if (_movesLeft > 0 && _movingRoutine == null)
@@ -87,8 +102,11 @@ public class BoardPlayers : MonoBehaviour
         }
         else if (_movesLeft <= 0)
         {
-            _lastTile.LandOnTile(this);
-            BoardgameManager.Instance.NextTurn();
+            string tileName = _lastTile.name;
+            string playerName = name;
+            
+            BoardgameManager.Instance.photonView.RPC("LandOnTile", RpcTarget.AllBuffered, tileName, playerName);
+            BoardgameManager.Instance.photonView.RPC("NextTurn", RpcTarget.AllBuffered);
         }
     }
 
@@ -107,7 +125,7 @@ public class BoardPlayers : MonoBehaviour
             _lastTile = _nextTilePosition.GetComponent<Tiles>();
             while (Vector3.Distance(transform.position, _nextTilePosition.position) > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, _nextTilePosition.position, 25 * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
             _movingRoutine = null;
@@ -126,7 +144,7 @@ public class BoardPlayers : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, 0.3f);
+            transform.position = Vector3.MoveTowards(transform.position, position, 25 * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
         _movingRoutine = null;
@@ -141,12 +159,12 @@ public class BoardPlayers : MonoBehaviour
 
     private void SelectRightArrow(InputAction.CallbackContext context)
     {
-        _intersection.SelectRightArrow();
+        _intersection.photonView.RPC("SelectRightArrow", RpcTarget.AllBuffered);
     }
 
     private void SelectLeftArrow(InputAction.CallbackContext context)
     {
-        _intersection.SelectLeftArrow();
+        _intersection.photonView.RPC("SelectLeftArrow", RpcTarget.AllBuffered);
     }
 
     private void SelectIntersectionOption(InputAction.CallbackContext context)
@@ -155,4 +173,19 @@ public class BoardPlayers : MonoBehaviour
 
         _controls.Intersection.Disable();
     }
+
+    public void OpenMap()
+    {
+        BoardgameManager.Instance.photonView.RPC("OpenMap", RpcTarget.AllBuffered, name);
+        _controls.Map.Enable();
+        photonView.RPC("DisableButtons",RpcTarget.AllBuffered);
+    }
+
+    private void CloseMap(InputAction.CallbackContext context)
+    {
+        BoardgameManager.Instance.photonView.RPC("CloseMap", RpcTarget.AllBuffered);
+        _controls.Map.Disable();
+        _turnButtons.SetActive(true);
+    }
+
 }

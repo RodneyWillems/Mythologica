@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class IntersectionTile : Tiles
 {
@@ -8,6 +9,8 @@ public class IntersectionTile : Tiles
     [SerializeField] private Transform _leftTile;
     [SerializeField] private Transform _rightTile;
 
+    private BoardPlayers _recentPlayer;
+
     private int _selectedArrow;
     private bool _firstTime = true;
 
@@ -15,34 +18,42 @@ public class IntersectionTile : Tiles
     {
         if (_firstTime)
         {
-            StartSelectingArrows(player);
+            _recentPlayer = player;
+            photonView.RPC("StartSelectingArrows", RpcTarget.AllBuffered);
             _firstTime = false;
             return null;
         }
         else if (_selectedArrow == 1)
         {
-            _firstTime = true;
-            _arrowLeft.gameObject.SetActive(false);
-            _arrowRight.gameObject.SetActive(false);
+            photonView.RPC("RemoveArrows", RpcTarget.AllBuffered);
             return _rightTile;
         }
         else
         {
-            _firstTime = true;
-            _arrowLeft.gameObject.SetActive(false);
-            _arrowRight.gameObject.SetActive(false);
+            photonView.RPC("RemoveArrows", RpcTarget.AllBuffered);
             return _leftTile;
         }
     }
 
-    public void StartSelectingArrows(BoardPlayers player)
+    [PunRPC]
+    private void RemoveArrows()
+    {
+        ArrangePlayers(_recentPlayer);
+        _firstTime = true;
+        _arrowLeft.gameObject.SetActive(false);
+        _arrowRight.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    public void StartSelectingArrows()
     {
         _arrowLeft.gameObject.SetActive(true);
         _arrowRight.gameObject.SetActive(true);
-        player.StartDirectionSelection(this);
+        _recentPlayer.StartDirectionSelection(this);
         SelectLeftArrow();
     }
 
+    [PunRPC]
     public void SelectLeftArrow()
     {
         _selectedArrow = 0;
@@ -50,6 +61,7 @@ public class IntersectionTile : Tiles
         _arrowRight.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     }
 
+    [PunRPC]
     public void SelectRightArrow()
     {
         _selectedArrow = 1;

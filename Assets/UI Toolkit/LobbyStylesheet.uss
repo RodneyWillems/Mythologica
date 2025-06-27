@@ -45,10 +45,10 @@
     border-right-color: rgb(0, 0, 0);
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     font-size: 20px;
 }
 
@@ -61,6 +61,6 @@
     margin-top: auto;
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    -unity-font-definition: url("project://database/Assets/Artists/Textures/Fonts/BetterWOAH.ttf?fileID=12800000&guid=6ab2a9ffcb6c6ce479292e8be05d9186&type=3#BetterWOAH");
+    -unity-font-definition: url("project://database/Assets/Devs/Fonts/Gelio%20Fasolada.ttf?fileID=12800000&guid=2107916edd5480341a50fcee412294b5&type=3#Gelio Fasolada");
     font-size: 48px;
 }
