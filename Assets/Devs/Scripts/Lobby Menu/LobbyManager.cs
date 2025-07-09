@@ -1,74 +1,68 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+using ExitGames.Client.Photon;
+using Photon.Realtime;
+using TMPro;
 using UnityEngine.UIElements;
 
-using Hashtable = ExitGames.Client.Photon.Hashtable;
+[Serializable]
+public class PlayerListWrapper
+{
+    [SerializeField] public List<PlayerClass> Players = new List<PlayerClass>();
+}
 
-public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager Instance;
     
-    private PlayerClass[] Players = new PlayerClass[4];
-    public UIDocument UiDoc;
-    public int ReadyCount = 0;
+    [SerializeField] int _readyPlayersNeeded = 4;
+    
+    public PlayermodelClass[] Playermodels = new PlayermodelClass[4];
+    
+    private int _playerModelIndex = 0;
 
-    [SerializeField]
-    private int _amountOfReadyPlayersNeeded = 1; // Set the number of players needed to start the game
+    private List<PlayerClass> _players = new List<PlayerClass>();
     
-    public PlayermodelClass[] ModelOptions = new PlayermodelClass[4]
-    {
-        new PlayermodelClass(),
-        new PlayermodelClass(),
-        new PlayermodelClass(),
-        new PlayermodelClass()
-    };
+    // UI element
+    private UIDocument _uiDocument;
     
-    private int _nextModelIndex = 0; // Index to track the next available model
-    
-    // This array holds the visual elements for each player in the lobby.
+    // Visual elements for player objects
     private VisualElement[] _playerObjects;
+    
+    // Countdown element
     private Label _countdownElement;
+    
+    // Custom properties text for debugging
+    [SerializeField] 
+    private TextMeshProUGUI customPropertiesText;
+
+    private Dictionary<int, PlayerClass> _playersData = new Dictionary<int, PlayerClass>();
     private void Awake()
     {
         Instance = this;
-        
-        PhotonNetwork.IsMessageQueueRunning = false;
     }
-    
+
     private void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
-        PhotonNetwork.Instantiate("LobbyPlayer", Vector3.zero, Quaternion.identity, 0);   
-    }
-
-    private void Update()
-    {
+        PhotonNetwork.Instantiate("LobbyPlayer", Vector3.zero, Quaternion.identity, 0);
+        
+        _playersData[PhotonNetwork.LocalPlayer.ActorNumber] = new PlayerClass(PhotonNetwork.LocalPlayer.ActorNumber, PhotonNetwork.LocalPlayer.NickName);
+        
+        AssignModelToLocalPlayer();
+        UpdateLobbyUI();
     }
     
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            stream.SendNext(ReadyCount);
-        }
-        else
-        {
-            // Network player, receive data
-            ReadyCount = (int)stream.ReceiveNext();
-        }
-    }
-
     private void OnEnable()
     {
-        UiDoc = GetComponent<UIDocument>();
+        _uiDocument = GetComponent<UIDocument>();
         
         // Get the root visual element
-        VisualElement root = UiDoc.rootVisualElement;
+        VisualElement root = _uiDocument.rootVisualElement;
         // Find the player objects in the hierarchy
         _playerObjects = new VisualElement[4];
         
@@ -80,184 +74,242 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
         _countdownElement = root.Q<Label>("Counter");
     }
 
+    private void AssignModelToLocalPlayer()
+    {
+        // Find first unselected model
+        PlayermodelClass availableModel = Playermodels.FirstOrDefault(model => !model.IsSelected);
+
+        if (availableModel != null)
+        {
+            // Mark the model as selected
+            availableModel.IsSelected = true;
+            
+            // Assign the model to the local player
+            PlayerClass playerData = _playersData[PhotonNetwork.LocalPlayer.ActorNumber];
+            playerData.PlayerModel = availableModel;
+            
+            // Store the model in Photon's custom properties
+            Hashtable customProperties = new Hashtable
+            {
+                { "PlayerModel", availableModel.Model.name },
+                {"Ready", false}
+            };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
+        }
+        else
+        {
+            Debug.LogError("No available models to assign to the local player.");
+        }
+    }
+    
+    public void LocalPlayerHitReady(PlayerClass player)
+    {
+        player.IsReady = !player.IsReady;
+        
+        Hashtable customProperties = new Hashtable
+        {
+            { "Ready", player.IsReady }
+        };
+        
+        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPLayer, Hashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.ContainsKey("Ready"))
+        {
+            CheckAllReady();
+        }
+    }
+    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        base.OnPlayerEnteredRoom(newPlayer);
+        // Add the new player to _playersData with a default PlayerClass
+        _playersData[newPlayer.ActorNumber] = new PlayerClass(newPlayer.ActorNumber, newPlayer.NickName);
         
-        AssigModelToPlayer(newPlayer);
+        // Re check ready state for all players
+        CheckAllReady();
     }
 
-    private void AssigModelToPlayer(Player player)
+    private void CheckAllReady()
     {
-        if (_nextModelIndex >= ModelOptions.Length)
-        {
-            Debug.LogWarning("No more models available to assign.");
+        UpdateLobbyUI();
+        if (PhotonNetwork.CurrentRoom.PlayerCount < _readyPlayersNeeded)
             return;
+
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+            if (!p.CustomProperties.TryGetValue("Ready", out object ready) || !(bool)ready)
+                return;
         }
 
-        // Assign the next available model
-        PlayermodelClass assignedModel = ModelOptions[_nextModelIndex];
-        assignedModel.IsSelected = true;
-
-        // Update the player's custom properties
-        Hashtable properties = new Hashtable
+        // All players are ready
+        if (PhotonNetwork.IsMasterClient)
         {
-            {"SelectedModel", assignedModel.Model.name}
-        };
-        player.SetCustomProperties(properties);
-
-        Debug.Log($"Assigned model {assignedModel.Model.name} to player {player.NickName}.");
-
-        _nextModelIndex++; // Move to the next model
+            PhotonNetwork.LoadLevel("Board");
+        }
     }
     
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    public void AddPlayer(PlayerClass player)
     {
-        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+        _players.Add(player);
+        UpdateLobbyUI();  
         
-        // Check if the player has a selected model
-        if (changedProps.ContainsKey("SelectedModel"))
+        if(PhotonNetwork.CurrentRoom == null){Debug.Log("Called before room"); return;}
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
         {
-            string modelName = (string)changedProps["SelectedModel"];
-            Debug.Log($"Player {targetPlayer.NickName} selected model: {modelName}");
-            
-            // Find the model in ModelOptions
-            foreach (PlayermodelClass model in ModelOptions)
+            { "PlayerList", JsonUtility.ToJson(new PlayerListWrapper { Players = _players }) }
+        });
+    }
+    
+    public void RemovePlayer(PlayerClass player)
+    {
+        _players.Remove(player);
+        UpdateLobbyUI();
+        
+        if(PhotonNetwork.CurrentRoom == null){return;}
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+        {
+            { "PlayerList", JsonUtility.ToJson(new PlayerListWrapper { Players = _players }) }
+        });
+    }
+    
+    private void UpdateLobbyUI()
+    {
+        // Update the UI to reflect the current player list and ready states
+        for (int i = 0; i < _playerObjects.Length; i++)
+        {
+            if (i < _players.Count && _players[i] != null)
             {
-                if (model.Model.name == modelName)
+                _playerObjects[i].style.display = DisplayStyle.Flex;
+                _playerObjects[i].Q<Label>("PlayerName").text = _players[i].Name;
+    
+                VisualElement playerIcon = _playerObjects[i].Q<VisualElement>("Icon");
+    
+                if (_players[i].IsReady)
                 {
-                    // Update the player's visual element with the selected model
-                    VisualElement playerObject = _playerObjects[targetPlayer.ActorNumber - 1];
-                    playerObject.Q<VisualElement>("Icon").style.backgroundImage = model.Icon;
-                    
-                    model.IsSelected = true;
-                    return;
+                    // Change icons border to green if player is ready
+                    playerIcon.style.borderTopColor = Color.green;
+                    playerIcon.style.borderBottomColor = Color.green;
+                    playerIcon.style.borderLeftColor = Color.green;
+                    playerIcon.style.borderRightColor = Color.green;
+    
+                    playerIcon.style.borderTopWidth = 2f;
+                    playerIcon.style.borderBottomWidth = 2f;
+                    playerIcon.style.borderLeftWidth = 2f;
+                    playerIcon.style.borderRightWidth = 2f;
+                }
+                else
+                {
+                    playerIcon.style.borderTopWidth = 0f;
+                    playerIcon.style.borderBottomWidth = 0f;
+                    playerIcon.style.borderLeftWidth = 0f;
+                    playerIcon.style.borderRightWidth = 0f;
                 }
             }
+            else
+            {
+                // _playerObjects[i].style.display = DisplayStyle.None;
+            }
         }
     }
-    
-    [PunRPC]
-    public void AddPlayerToArray(string serializedPlayer)
-    {
-        PlayerClass receivedPlayer = JsonUtility.FromJson<PlayerClass>(serializedPlayer);
-        
-        Players[receivedPlayer.Id] = receivedPlayer;
-    }
-    
-    public PlayerClass GetPlayerClass(PhotonView photonView)
-    {
-        PlayerClass playerClass = new PlayerClass(photonView.CreatorActorNr - 1, photonView.Owner.NickName);
-        return playerClass;
-    }
-    public VisualElement GetPlayerObject(PlayerClass playerClass)
-    {
-        _playerObjects[playerClass.Id].Q<Label>("PlayerName").text = playerClass.Name;
-        return _playerObjects[playerClass.Id];
-    }
-    
-    /// <summary>
-    /// Only call this method at the start of the game to get a player model that is not yet selected.
-    /// </summary>
-    
-    // public PlayermodelClass GetStartingPlayerModel(PlayerClass playerClass)
+    // public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     // {
-    //     foreach (PlayermodelClass model in ModelOptions)
+    //     Debug.Log("OnRoomPropertiesUpdate");
+    //     base.OnRoomPropertiesUpdate(propertiesThatChanged);
+    //     if (propertiesThatChanged.TryGetValue("PlayerList", out var serializedPlayers))
     //     {
-    //         if (model.IsSelected == false)
+    //         PlayerListWrapper wrapper = JsonUtility.FromJson<PlayerListWrapper>(serializedPlayers.ToString());
+    //         _players = wrapper.Players;
+    //         UpdateLobbyUI();
+    //     }
+    //     UpdateCustomPropertiesUI(); // Update UI for debugging purposes
+    // }
+
+    
+    //
+    // [PunRPC]
+    // private void UpdateReadyState(int playerId, bool isReady)
+    // {
+    //     foreach (PlayerClass player in _players)
+    //     {
+    //         if (player.Id == playerId)
     //         {
-    //             photonView.RPC("SetModelSelectedState", RpcTarget.AllBuffered, true, model.Model.name);
-    //             return model;
+    //             player.IsReady = isReady;
+    //             
     //         }
+    //         
+    //         if(PhotonNetwork.CurrentRoom == null){continue;}
+    //         PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+    //         {
+    //             { "PlayerList", JsonUtility.ToJson(new PlayerListWrapper { Players = _players }) }
+    //         });
     //     }
     //     
-    //     Debug.LogWarning("No available player models found.");
-    //     return null; // Return null or handle the case where no models are available
+    //     UpdateCustomPropertiesUI(); // Update UI for debugging purposes
     // }
     //
-    [PunRPC]
-    private void SetModelSelectedState(bool state, string modelName)
-    {
-        foreach (PlayermodelClass model in ModelOptions)
-        {
-            if (model.Model.name == modelName)
-            {
-                model.IsSelected = state;
-                return;
-            }
-        }
-        
-        Debug.LogWarning($"Model {modelName} not found in ModelOptions.");
-    }
+    // public bool AreAllPlayersReady()
+    // {
+    //     foreach (var player in _players)
+    //     {
+    //         if (!player.IsReady) return false;
+    //     }
+    //     return true;
+    // }
+    //
+    // public void StartGame()
+    // {
+    //     if (AreAllPlayersReady() && PhotonNetwork.IsMasterClient)
+    //     {
+    //         // Load the game scene
+    //         PhotonNetwork.CurrentRoom.IsOpen = false; // Prevent new players from joining
+    //         PhotonNetwork.CurrentRoom.IsVisible = false; // Hide the room from the lobby
+    //         PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+    //         {
+    //             { "GameStarted", true }
+    //         });
+    //         
+    //         // Load the game scene
+    //         PhotonNetwork.LoadLevel("Board");
+    //     }
+    //     else if (!PhotonNetwork.IsMasterClient)
+    //     {
+    //         Debug.LogWarning("Only the master client can start the game.");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("Not all players are ready.");
+    //     }
+    //     {
+    //         PhotonNetwork.LoadLevel("Board");
+    //     }
+    // }
+    //
     
-    [PunRPC]
-    public void CheckIfReady(string serializedPlayer)
-    {
-        // Deserialize the player data from the JSON string
-        PlayerClass receivedPlayer = JsonUtility.FromJson<PlayerClass>(serializedPlayer);
-        
-        // Get the player's visual element from the _playerObjects array using their ID
-        VisualElement playerIcon = _playerObjects[receivedPlayer.Id].Q<VisualElement>("Icon");
-        
-        // Check how many players are ready
-        if (receivedPlayer.IsReady)
-        {
-            ReadyCount += 1;
-            Debug.Log($"{receivedPlayer.Name} is ready! Total ready players: {ReadyCount}");
-            
-            // Change icons border to green if player is ready
-            playerIcon.style.borderTopColor = Color.green;
-            playerIcon.style.borderBottomColor = Color.green;
-            playerIcon.style.borderLeftColor = Color.green;
-            playerIcon.style.borderRightColor = Color.green;
-                    
-            playerIcon.style.borderTopWidth = 2f;
-            playerIcon.style.borderBottomWidth = 2f;
-            playerIcon.style.borderLeftWidth = 2f;
-            playerIcon.style.borderRightWidth = 2f;
-        }
-        else
-        {
-            ReadyCount -= 1;
-            Debug.Log($"{receivedPlayer.Name} is not ready! Total ready players: {ReadyCount}");
-            
-            playerIcon.style.borderTopWidth = 0f;
-            playerIcon.style.borderBottomWidth = 0f;
-            playerIcon.style.borderLeftWidth = 0f;
-            playerIcon.style.borderRightWidth = 0f;
-        }
-
-        if(ReadyCount >= _amountOfReadyPlayersNeeded)
-        {
-            Debug.Log("All players are ready!");
-            // Load the game scene or perform any other action needed when all players are ready.
-            StartCoroutine(PlayersAreReady());
-        }
-        else
-        {
-            Debug.Log("Not all players are ready yet.");
-            
-            _countdownElement.visible = false;
-            StopAllCoroutines();
-        } 
-    }
-
-    public IEnumerator PlayersAreReady()
-    {
-        int countdown = 3;
-        while (countdown <= 3 && ReadyCount == _amountOfReadyPlayersNeeded)
-        {
-            
-            _countdownElement.visible = true;
-            _countdownElement.text = countdown.ToString();
-            yield return new WaitForSeconds(1f);
-            if (countdown <= 1 && PhotonNetwork.IsMasterClient)
-            {
-                Debug.Log("Loading Scene");
-                PhotonNetwork.LoadLevel("Board");
-            }
-            countdown -= 1;
-        }
-    }
-    
+    //
+    // public override void OnPlayerLeftRoom(Player otherPlayer)
+    // {
+    //     _players.RemoveAt(otherPlayer.ActorNumber);
+    //     UpdateLobbyUI();
+    //     
+    //     UpdateCustomPropertiesUI(); // Update UI for debugging purposes
+    //     
+    //     if(PhotonNetwork.CurrentRoom == null){return;}
+    //     PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+    //     {
+    //         { "PlayerList", JsonUtility.ToJson(new PlayerListWrapper { Players = _players }) }
+    //     });
+    // }
+    //
+    // // DEBUGGING FUNCTIONS
+    // void UpdateCustomPropertiesUI()
+    // {
+    //     string propertiesDisplay = "Custom Properties:\n";
+    //     foreach (var property in PhotonNetwork.CurrentRoom.CustomProperties)
+    //     {
+    //         propertiesDisplay += $"{property.Key}: {property.Value}\n";
+    //     }
+    //     customPropertiesText.text = propertiesDisplay;
+    // }
 }

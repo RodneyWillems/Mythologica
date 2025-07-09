@@ -10,7 +10,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private byte _maxPlayersPerRoom = 4;
 
-    private string _gameVersion = "2.0";
+    private string _gameVersion = "3.0";
 
     private void Awake()
     {
@@ -42,7 +42,9 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-
+        if(!PhotonNetwork.IsMasterClient){return;}
+        
+        PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel("Lobby");
     }
 

@@ -47,7 +47,10 @@ public class BoardgameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
         PhotonNetwork.CurrentRoom.IsOpen = false;
 
-        string playerModelName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
+        // string playerModelName = DataManager.Instance.MyPlayerClass.Playermodel.Model.name + "Player";
+        
+        string playerModelName = PhotonNetwork.LocalPlayer.NickName;
+        
         foreach (GameObject playerObject in _playerObjects)
         {
             if (playerObject.name == playerModelName)

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerData 
 {
     public string PlayerName = null;
+    
     public GameObject PlayerObject = null;
     public int Obols = 0;
     public int Ambrosias = 0;

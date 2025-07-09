@@ -1430,10 +1430,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (9)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -1489,6 +1485,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2097,10 +2097,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (10)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -2156,6 +2152,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3604,10 +3604,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (8)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -3663,6 +3659,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3989,10 +3989,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (12)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -4048,6 +4044,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (12)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4956,10 +4956,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (2)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -5015,6 +5011,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6159,26 +6159,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 543450653339388493}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: -7918335002988649766, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 082efdd23dcada94286461a89948cb5d, type: 2}
-    - target: {fileID: 5368844724668326736, guid: 0f2d698c96a5bf44eb9abe786d09be52, type: 3}
-      propertyPath: 'm_Materials.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 082efdd23dcada94286461a89948cb5d, type: 2}
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
@@ -6234,6 +6214,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 082efdd23dcada94286461a89948cb5d, type: 2}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368844724668326736, guid: 0f2d698c96a5bf44eb9abe786d09be52, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 082efdd23dcada94286461a89948cb5d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7228,14 +7224,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.03018
@@ -7290,6 +7278,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7375,10 +7371,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (7)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -7434,6 +7426,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7809,10 +7805,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (11)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -7868,6 +7860,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8260,10 +8256,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (3)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -8319,6 +8311,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9398,10 +9394,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (5)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -9457,6 +9449,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10542,10 +10538,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (6)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -10601,6 +10593,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11808,10 +11804,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
-      propertyPath: m_Name
-      value: Boat (4)
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -11867,6 +11859,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35104901f5453754995da7fcbd25fd1c, type: 3}
+      propertyPath: m_Name
+      value: Boat (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13132,6 +13128,18 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: -6599879869295176180, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6599879869295176180, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6599879869295176180, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
+      propertyPath: 'ObservedComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 678789247461623202}
     - target: {fileID: 2026291563130418321, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 5.7160506
@@ -13217,6 +13225,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
+--- !u!114 &678789247461623202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2331591004600360233, guid: cac2351226291494aadaf825a0a66b4b, type: 3}
+  m_PrefabInstance: {fileID: 678789247461623201}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421067311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &919132149415661815
 GameObject:
   m_ObjectHideFlags: 0
@@ -13350,6 +13369,10 @@ PrefabInstance:
     - target: {fileID: -1793193679674468081, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: sceneViewId
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1793193679674468081, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 399869763810114647, guid: aea8c7313f5a3a547b6de96406416938, type: 3}
       propertyPath: _turnButtons
@@ -13486,8 +13509,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2014112400862701126, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014112400862701126, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
       propertyPath: ObservedComponents.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2693900258478548109, guid: d1112c04c80990043ad5178d2334d59b, type: 3}
       propertyPath: m_LocalPosition.y
