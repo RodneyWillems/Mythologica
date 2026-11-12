@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 
 [Serializable]
 public class IconPreset
@@ -51,18 +49,7 @@ public class ButtonIconManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     // Get the icon preset based on the current control scheme
     public IconPreset GetPreset(PlayerInput user)
     {
